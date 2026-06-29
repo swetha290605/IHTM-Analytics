@@ -1,0 +1,2731 @@
+{
+  "meta": {
+    "generated_at": "2026-06-25T09:38:50.415900",
+    "source": "Manufacturing Analytics"
+  },
+  "global_kpis": {
+    "timestamp": "2026-06-25T09:38:50.401228",
+    "total_queries": 30,
+    "total_tools": 2851,
+    "safety_accidents": 23
+  },
+  "query_analytics": {
+    "stage_distribution": [
+      {
+        "Stage": "Budget Confirmed",
+        "count": 6,
+        "pct": 20.0
+      },
+      {
+        "Stage": "Estimation",
+        "count": 6,
+        "pct": 20.0
+      },
+      {
+        "Stage": "Query",
+        "count": 6,
+        "pct": 20.0
+      },
+      {
+        "Stage": "Concept",
+        "count": 3,
+        "pct": 10.0
+      },
+      {
+        "Stage": "Speculation",
+        "count": 3,
+        "pct": 10.0
+      },
+      {
+        "Stage": "Waiting for Budget",
+        "count": 3,
+        "pct": 10.0
+      },
+      {
+        "Stage": "Waiting for User Confirmation",
+        "count": 3,
+        "pct": 10.0
+      }
+    ],
+    "plant_distribution": [
+      {
+        "Plant": "P1",
+        "count": 12,
+        "pct": 40.0
+      },
+      {
+        "Plant": "P2",
+        "count": 9,
+        "pct": 30.0
+      },
+      {
+        "Plant": "P3",
+        "count": 9,
+        "pct": 30.0
+      }
+    ],
+    "total_queries": 30
+  },
+  "safety": {
+    "month_accidents": [
+      {
+        "Month": "January",
+        "Year": "2026",
+        "No of Accidents": 4.0
+      },
+      {
+        "Month": "February",
+        "Year": "2026",
+        "No of Accidents": 0.0
+      },
+      {
+        "Month": "March",
+        "Year": "2026",
+        "No of Accidents": 1.0
+      },
+      {
+        "Month": "April",
+        "Year": "2026",
+        "No of Accidents": 8.0
+      },
+      {
+        "Month": "May",
+        "Year": "2026",
+        "No of Accidents": 3.0
+      },
+      {
+        "Month": "June",
+        "Year": "2026",
+        "No of Accidents": 6.0
+      },
+      {
+        "Month": "July",
+        "Year": "2026",
+        "No of Accidents": 1.0
+      }
+    ],
+    "safety_calendar": [
+      {
+        "month": "January",
+        "accidents": 4,
+        "status": "red",
+        "label": "LWD (4)"
+      },
+      {
+        "month": "February",
+        "accidents": 0,
+        "status": "green",
+        "label": "No Accident"
+      },
+      {
+        "month": "March",
+        "accidents": 1,
+        "status": "blue",
+        "label": "NLWD"
+      },
+      {
+        "month": "April",
+        "accidents": 8,
+        "status": "red",
+        "label": "LWD (8)"
+      },
+      {
+        "month": "May",
+        "accidents": 3,
+        "status": "red",
+        "label": "LWD (3)"
+      },
+      {
+        "month": "June",
+        "accidents": 6,
+        "status": "red",
+        "label": "LWD (6)"
+      },
+      {
+        "month": "July",
+        "accidents": 1,
+        "status": "blue",
+        "label": "NLWD"
+      }
+    ]
+  },
+  "revenue": {
+    "total_revenue": 45.7,
+    "yearly_target": 50.0,
+    "target_achievement_pct": 91.5,
+    "needed_per_3months": 0,
+    "revenue_by_month": [
+      {
+        "Month": "January",
+        "Revenue (Million Rs)": 5.0,
+        "Target (Million Rs)": 50.0
+      },
+      {
+        "Month": "February",
+        "Revenue (Million Rs)": 7.99,
+        "Target (Million Rs)": null
+      },
+      {
+        "Month": "March",
+        "Revenue (Million Rs)": 8.9,
+        "Target (Million Rs)": null
+      },
+      {
+        "Month": "April",
+        "Revenue (Million Rs)": 6.77,
+        "Target (Million Rs)": null
+      },
+      {
+        "Month": "May",
+        "Revenue (Million Rs)": 7.99,
+        "Target (Million Rs)": null
+      },
+      {
+        "Month": "June",
+        "Revenue (Million Rs)": 9.08,
+        "Target (Million Rs)": null
+      },
+      {
+        "Month": "July",
+        "Revenue (Million Rs)": null,
+        "Target (Million Rs)": null
+      },
+      {
+        "Month": "August",
+        "Revenue (Million Rs)": null,
+        "Target (Million Rs)": null
+      },
+      {
+        "Month": "September",
+        "Revenue (Million Rs)": null,
+        "Target (Million Rs)": null
+      },
+      {
+        "Month": "October",
+        "Revenue (Million Rs)": null,
+        "Target (Million Rs)": null
+      },
+      {
+        "Month": "November",
+        "Revenue (Million Rs)": null,
+        "Target (Million Rs)": null
+      },
+      {
+        "Month": "December",
+        "Revenue (Million Rs)": null,
+        "Target (Million Rs)": null
+      }
+    ]
+  },
+  "field_issues": {
+    "issues_by_month": [
+      {
+        "Month": "January",
+        "Year": "2026",
+        "Identified": 12,
+        "Solved": 8,
+        "Cum Identified": 12,
+        "Cum Solved": 8
+      },
+      {
+        "Month": "February",
+        "Year": "2026",
+        "Identified": 15,
+        "Solved": 12,
+        "Cum Identified": 27,
+        "Cum Solved": 20
+      },
+      {
+        "Month": "March",
+        "Year": "2026",
+        "Identified": 18,
+        "Solved": 14,
+        "Cum Identified": 45,
+        "Cum Solved": 34
+      },
+      {
+        "Month": "April",
+        "Year": "2026",
+        "Identified": 10,
+        "Solved": 10,
+        "Cum Identified": 55,
+        "Cum Solved": 44
+      },
+      {
+        "Month": "May",
+        "Year": "2026",
+        "Identified": 14,
+        "Solved": 13,
+        "Cum Identified": 69,
+        "Cum Solved": 57
+      },
+      {
+        "Month": "June",
+        "Year": "2026",
+        "Identified": 16,
+        "Solved": 15,
+        "Cum Identified": 85,
+        "Cum Solved": 72
+      },
+      {
+        "Month": "July",
+        "Year": "2026",
+        "Identified": 12,
+        "Solved": 12,
+        "Cum Identified": 97,
+        "Cum Solved": 84
+      },
+      {
+        "Month": "August",
+        "Year": "2026",
+        "Identified": 18,
+        "Solved": 17,
+        "Cum Identified": 115,
+        "Cum Solved": 101
+      },
+      {
+        "Month": "September",
+        "Year": "2026",
+        "Identified": 20,
+        "Solved": 18,
+        "Cum Identified": 135,
+        "Cum Solved": 119
+      },
+      {
+        "Month": "October",
+        "Year": "2026",
+        "Identified": 17,
+        "Solved": 16,
+        "Cum Identified": 152,
+        "Cum Solved": 135
+      },
+      {
+        "Month": "November",
+        "Year": "2026",
+        "Identified": 15,
+        "Solved": 14,
+        "Cum Identified": 167,
+        "Cum Solved": 149
+      },
+      {
+        "Month": "December",
+        "Year": "2026",
+        "Identified": 13,
+        "Solved": 12,
+        "Cum Identified": 180,
+        "Cum Solved": 161
+      }
+    ]
+  },
+  "cost_competency": {
+    "cost_by_month": [
+      {
+        "Month": "January",
+        "Local Value": 1,
+        "Target Value": 0.95,
+        "IHTM Value": 1.27,
+        "Cost in Manufacturing": null
+      },
+      {
+        "Month": "February",
+        "Local Value": 1,
+        "Target Value": 0.95,
+        "IHTM Value": 1.24,
+        "Cost in Manufacturing": 1.27
+      },
+      {
+        "Month": "March",
+        "Local Value": 1,
+        "Target Value": 0.95,
+        "IHTM Value": 1.2,
+        "Cost in Manufacturing": 1.24
+      },
+      {
+        "Month": "April",
+        "Local Value": 1,
+        "Target Value": 0.95,
+        "IHTM Value": 1.15,
+        "Cost in Manufacturing": 1.2
+      },
+      {
+        "Month": "May",
+        "Local Value": 1,
+        "Target Value": 0.95,
+        "IHTM Value": 1.15,
+        "Cost in Manufacturing": 1.15
+      },
+      {
+        "Month": "June",
+        "Local Value": 1,
+        "Target Value": 0.95,
+        "IHTM Value": 0.99,
+        "Cost in Manufacturing": 1.15
+      },
+      {
+        "Month": "July",
+        "Local Value": 1,
+        "Target Value": 0.95,
+        "IHTM Value": 0.99,
+        "Cost in Manufacturing": 0.99
+      },
+      {
+        "Month": "August",
+        "Local Value": 1,
+        "Target Value": 0.95,
+        "IHTM Value": 0.99,
+        "Cost in Manufacturing": 0.99
+      },
+      {
+        "Month": "September",
+        "Local Value": 1,
+        "Target Value": 0.95,
+        "IHTM Value": 0.99,
+        "Cost in Manufacturing": 0.99
+      },
+      {
+        "Month": "October",
+        "Local Value": 1,
+        "Target Value": 0.95,
+        "IHTM Value": 0.95,
+        "Cost in Manufacturing": 0.99
+      },
+      {
+        "Month": "November",
+        "Local Value": 1,
+        "Target Value": 0.95,
+        "IHTM Value": 0.95,
+        "Cost in Manufacturing": 0.99
+      },
+      {
+        "Month": "December",
+        "Local Value": 1,
+        "Target Value": 0.95,
+        "IHTM Value": 0.95,
+        "Cost in Manufacturing": 0.95
+      }
+    ]
+  },
+  "punch_points": {
+    "punch_by_month": [
+      {
+        "Month": "January",
+        "Item": "Wrap- Guard - QC",
+        "Item Count": 1777.0,
+        "Punch Points": 1777.0
+      },
+      {
+        "Month": "January",
+        "Item": "688D",
+        "Item Count": 1345.0,
+        "Punch Points": 1345.0
+      },
+      {
+        "Month": "January",
+        "Item": "Zone Jigs",
+        "Item Count": 67.0,
+        "Punch Points": 67.0
+      },
+      {
+        "Month": "January",
+        "Item": "GBL",
+        "Item Count": 23.0,
+        "Punch Points": 23.0
+      },
+      {
+        "Month": "January",
+        "Item": "SBC",
+        "Item Count": 6.0,
+        "Punch Points": 6.0
+      },
+      {
+        "Month": "February",
+        "Item": "688D",
+        "Item Count": 4.0,
+        "Punch Points": 4.0
+      },
+      {
+        "Month": "February",
+        "Item": "Zone Jigs",
+        "Item Count": 5.0,
+        "Punch Points": 5.0
+      },
+      {
+        "Month": "February",
+        "Item": "GBL",
+        "Item Count": 1677.0,
+        "Punch Points": 1677.0
+      },
+      {
+        "Month": "February",
+        "Item": "THY",
+        "Item Count": 4.0,
+        "Punch Points": 4.0
+      },
+      {
+        "Month": "March",
+        "Item": "688D",
+        "Item Count": 33.0,
+        "Punch Points": 33.0
+      },
+      {
+        "Month": "March",
+        "Item": "GBL",
+        "Item Count": 56.0,
+        "Punch Points": 56.0
+      },
+      {
+        "Month": "April",
+        "Item": "GBL",
+        "Item Count": 21.0,
+        "Punch Points": 21.0
+      },
+      {
+        "Month": "May",
+        "Item": "Wrap- Guard - QC",
+        "Item Count": 1345.0,
+        "Punch Points": 1345.0
+      },
+      {
+        "Month": "May",
+        "Item": "Zone Jigs",
+        "Item Count": 1111.0,
+        "Punch Points": 1111.0
+      },
+      {
+        "Month": "June",
+        "Item": "688D",
+        "Item Count": 1145.0,
+        "Punch Points": 1145.0
+      }
+    ]
+  },
+  "tools": {
+    "total_cost_million": 1124.8,
+    "total_tools": 2851,
+    "plant_distribution": [
+      {
+        "Plant": "Camry",
+        "cost": 136.3,
+        "tools": 520,
+        "pct": 12.1
+      },
+      {
+        "Plant": "Others",
+        "cost": 61.9,
+        "tools": 204,
+        "pct": 5.5
+      },
+      {
+        "Plant": "P1",
+        "cost": 153.5,
+        "tools": 1104,
+        "pct": 13.6
+      },
+      {
+        "Plant": "P2",
+        "cost": 106.2,
+        "tools": 739,
+        "pct": 9.4
+      },
+      {
+        "Plant": "P3",
+        "cost": 104.5,
+        "tools": 284,
+        "pct": 9.3
+      }
+    ],
+    "plant_shop_distribution": [
+      {
+        "Plant": "Camry",
+        "Shop": "Camry",
+        "cost": 65.8,
+        "tools": 234,
+        "pct": 5.8,
+        "name": "Camry - Camry"
+      },
+      {
+        "Plant": "Camry",
+        "Shop": "Weld",
+        "cost": 70.5,
+        "tools": 286,
+        "pct": 6.3,
+        "name": "Camry - Weld"
+      },
+      {
+        "Plant": "Others",
+        "Shop": "Others",
+        "cost": 61.9,
+        "tools": 204,
+        "pct": 5.5,
+        "name": "Others - Others"
+      },
+      {
+        "Plant": "P1",
+        "Shop": "Assy",
+        "cost": 48.0,
+        "tools": 240,
+        "pct": 4.3,
+        "name": "P1 - Assy"
+      },
+      {
+        "Plant": "P1",
+        "Shop": "Press",
+        "cost": 46.6,
+        "tools": 117,
+        "pct": 4.1,
+        "name": "P1 - Press"
+      },
+      {
+        "Plant": "P1",
+        "Shop": "QI",
+        "cost": 58.9,
+        "tools": 747,
+        "pct": 5.2,
+        "name": "P1 - QI"
+      },
+      {
+        "Plant": "P2",
+        "Shop": "QC",
+        "cost": 51.2,
+        "tools": 130,
+        "pct": 4.6,
+        "name": "P2 - QC"
+      },
+      {
+        "Plant": "P2",
+        "Shop": "Weld",
+        "cost": 55.0,
+        "tools": 609,
+        "pct": 4.9,
+        "name": "P2 - Weld"
+      },
+      {
+        "Plant": "P3",
+        "Shop": "Assy",
+        "cost": 50.4,
+        "tools": 155,
+        "pct": 4.5,
+        "name": "P3 - Assy"
+      },
+      {
+        "Plant": "P3",
+        "Shop": "Press",
+        "cost": 54.1,
+        "tools": 129,
+        "pct": 4.8,
+        "name": "P3 - Press"
+      }
+    ],
+    "budget_distribution": [
+      {
+        "Budget Type": "Capex",
+        "cost": 258.0,
+        "tools": 1388,
+        "pct": 22.9
+      },
+      {
+        "Budget Type": "Revenue",
+        "cost": 304.4,
+        "tools": 1463,
+        "pct": 27.1
+      }
+    ],
+    "raw_entries": [
+      {
+        "Tool Number": 1.0,
+        "Project": "TOOL-001",
+        "Plant": "P1",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "January",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 2.5,
+        "No of Tools": 5,
+        "Status": null
+      },
+      {
+        "Tool Number": 2.0,
+        "Project": "TOOL-002",
+        "Plant": "P2",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "January",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.2,
+        "No of Tools": 7,
+        "Status": null
+      },
+      {
+        "Tool Number": 3.0,
+        "Project": "TOOL-003",
+        "Plant": "P3",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "January",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 2.8,
+        "No of Tools": 6,
+        "Status": null
+      },
+      {
+        "Tool Number": 4.0,
+        "Project": "TOOL-004",
+        "Plant": "Camry",
+        "Shop": "Camry",
+        "Budget Type": "Revenue",
+        "Month": "January",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.1,
+        "No of Tools": 8,
+        "Status": null
+      },
+      {
+        "Tool Number": 5.0,
+        "Project": "TOOL-005",
+        "Plant": "P1",
+        "Shop": "QI",
+        "Budget Type": "Capex",
+        "Month": "January",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.5,
+        "No of Tools": 600,
+        "Status": null
+      },
+      {
+        "Tool Number": 6.0,
+        "Project": "TOOL-006",
+        "Plant": "P2",
+        "Shop": "QC",
+        "Budget Type": "Revenue",
+        "Month": "January",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 2.9,
+        "No of Tools": 6,
+        "Status": null
+      },
+      {
+        "Tool Number": 7.0,
+        "Project": "TOOL-007",
+        "Plant": "P3",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "January",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.1,
+        "No of Tools": 6,
+        "Status": null
+      },
+      {
+        "Tool Number": 8.0,
+        "Project": "TOOL-008",
+        "Plant": "Camry",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "January",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.5,
+        "No of Tools": 9,
+        "Status": null
+      },
+      {
+        "Tool Number": 9.0,
+        "Project": "TOOL-009",
+        "Plant": "P1",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "January",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 2.6,
+        "No of Tools": 5,
+        "Status": null
+      },
+      {
+        "Tool Number": 10.0,
+        "Project": "TOOL-010",
+        "Plant": "Others",
+        "Shop": "Others",
+        "Budget Type": "Revenue",
+        "Month": "January",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.8,
+        "No of Tools": 7,
+        "Status": null
+      },
+      {
+        "Tool Number": 11.0,
+        "Project": "TOOL-011",
+        "Plant": "P1",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "February",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 2.8,
+        "No of Tools": 6,
+        "Status": null
+      },
+      {
+        "Tool Number": 12.0,
+        "Project": "TOOL-012",
+        "Plant": "P2",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "February",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.5,
+        "No of Tools": 8,
+        "Status": null
+      },
+      {
+        "Tool Number": 13.0,
+        "Project": "TOOL-013",
+        "Plant": "P3",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "February",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.0,
+        "No of Tools": 7,
+        "Status": null
+      },
+      {
+        "Tool Number": 14.0,
+        "Project": "TOOL-014",
+        "Plant": "Camry",
+        "Shop": "Camry",
+        "Budget Type": "Revenue",
+        "Month": "February",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.3,
+        "No of Tools": 9,
+        "Status": null
+      },
+      {
+        "Tool Number": 15.0,
+        "Project": "TOOL-015",
+        "Plant": "P1",
+        "Shop": "QI",
+        "Budget Type": "Capex",
+        "Month": "February",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.8,
+        "No of Tools": 8,
+        "Status": null
+      },
+      {
+        "Tool Number": 16.0,
+        "Project": "TOOL-016",
+        "Plant": "P2",
+        "Shop": "QC",
+        "Budget Type": "Revenue",
+        "Month": "February",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.1,
+        "No of Tools": 7,
+        "Status": null
+      },
+      {
+        "Tool Number": 17.0,
+        "Project": "TOOL-017",
+        "Plant": "P3",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "February",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.3,
+        "No of Tools": 7,
+        "Status": null
+      },
+      {
+        "Tool Number": 18.0,
+        "Project": "TOOL-018",
+        "Plant": "Camry",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "February",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.7,
+        "No of Tools": 10,
+        "Status": null
+      },
+      {
+        "Tool Number": 19.0,
+        "Project": "TOOL-019",
+        "Plant": "P1",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "February",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 2.9,
+        "No of Tools": 6,
+        "Status": null
+      },
+      {
+        "Tool Number": 20.0,
+        "Project": "TOOL-020",
+        "Plant": "Others",
+        "Shop": "Others",
+        "Budget Type": "Revenue",
+        "Month": "February",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.0,
+        "No of Tools": 8,
+        "Status": null
+      },
+      {
+        "Tool Number": 21.0,
+        "Project": "TOOL-021",
+        "Plant": "P1",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "March",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.0,
+        "No of Tools": 7,
+        "Status": null
+      },
+      {
+        "Tool Number": 22.0,
+        "Project": "TOOL-022",
+        "Plant": "P2",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "March",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.7,
+        "No of Tools": 400,
+        "Status": null
+      },
+      {
+        "Tool Number": 23.0,
+        "Project": "TOOL-023",
+        "Plant": "P3",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "March",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.2,
+        "No of Tools": 8,
+        "Status": null
+      },
+      {
+        "Tool Number": 24.0,
+        "Project": "TOOL-024",
+        "Plant": "Camry",
+        "Shop": "Camry",
+        "Budget Type": "Revenue",
+        "Month": "March",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.5,
+        "No of Tools": 10,
+        "Status": null
+      },
+      {
+        "Tool Number": 25.0,
+        "Project": "TOOL-025",
+        "Plant": "P1",
+        "Shop": "QI",
+        "Budget Type": "Capex",
+        "Month": "March",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.0,
+        "No of Tools": 9,
+        "Status": null
+      },
+      {
+        "Tool Number": 26.0,
+        "Project": "TOOL-026",
+        "Plant": "P2",
+        "Shop": "QC",
+        "Budget Type": "Revenue",
+        "Month": "March",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.3,
+        "No of Tools": 8,
+        "Status": null
+      },
+      {
+        "Tool Number": 27.0,
+        "Project": "TOOL-027",
+        "Plant": "P3",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "March",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.5,
+        "No of Tools": 8,
+        "Status": null
+      },
+      {
+        "Tool Number": 28.0,
+        "Project": "TOOL-028",
+        "Plant": "Camry",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "March",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.9,
+        "No of Tools": 11,
+        "Status": null
+      },
+      {
+        "Tool Number": 29.0,
+        "Project": "TOOL-029",
+        "Plant": "P1",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "March",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.1,
+        "No of Tools": 7,
+        "Status": null
+      },
+      {
+        "Tool Number": 30.0,
+        "Project": "TOOL-030",
+        "Plant": "Others",
+        "Shop": "Others",
+        "Budget Type": "Revenue",
+        "Month": "March",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.2,
+        "No of Tools": 9,
+        "Status": null
+      },
+      {
+        "Tool Number": 31.0,
+        "Project": "TOOL-031",
+        "Plant": "P1",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "April",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.2,
+        "No of Tools": 7,
+        "Status": null
+      },
+      {
+        "Tool Number": 32.0,
+        "Project": "TOOL-032",
+        "Plant": "P2",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "April",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.9,
+        "No of Tools": 9,
+        "Status": null
+      },
+      {
+        "Tool Number": 33.0,
+        "Project": "TOOL-033",
+        "Plant": "P3",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "April",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.6,
+        "No of Tools": 8,
+        "Status": null
+      },
+      {
+        "Tool Number": 34.0,
+        "Project": "TOOL-034",
+        "Plant": "Camry",
+        "Shop": "Camry",
+        "Budget Type": "Revenue",
+        "Month": "April",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.9,
+        "No of Tools": 10,
+        "Status": null
+      },
+      {
+        "Tool Number": 35.0,
+        "Project": "TOOL-035",
+        "Plant": "P1",
+        "Shop": "QI",
+        "Budget Type": "Capex",
+        "Month": "April",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.3,
+        "No of Tools": 9,
+        "Status": null
+      },
+      {
+        "Tool Number": 36.0,
+        "Project": "TOOL-036",
+        "Plant": "P2",
+        "Shop": "QC",
+        "Budget Type": "Revenue",
+        "Month": "April",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.7,
+        "No of Tools": 8,
+        "Status": null
+      },
+      {
+        "Tool Number": 37.0,
+        "Project": "TOOL-037",
+        "Plant": "P3",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "April",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.9,
+        "No of Tools": 8,
+        "Status": null
+      },
+      {
+        "Tool Number": 38.0,
+        "Project": "TOOL-038",
+        "Plant": "Camry",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "April",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.3,
+        "No of Tools": 11,
+        "Status": null
+      },
+      {
+        "Tool Number": 39.0,
+        "Project": "TOOL-039",
+        "Plant": "P1",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "April",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.3,
+        "No of Tools": 7,
+        "Status": null
+      },
+      {
+        "Tool Number": 40.0,
+        "Project": "TOOL-040",
+        "Plant": "Others",
+        "Shop": "Others",
+        "Budget Type": "Revenue",
+        "Month": "April",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.5,
+        "No of Tools": 9,
+        "Status": null
+      },
+      {
+        "Tool Number": 41.0,
+        "Project": "TOOL-041",
+        "Plant": "P1",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "May",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.5,
+        "No of Tools": 8,
+        "Status": null
+      },
+      {
+        "Tool Number": 42.0,
+        "Project": "TOOL-042",
+        "Plant": "P2",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "May",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.2,
+        "No of Tools": 10,
+        "Status": null
+      },
+      {
+        "Tool Number": 43.0,
+        "Project": "TOOL-043",
+        "Plant": "P3",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "May",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.9,
+        "No of Tools": 9,
+        "Status": null
+      },
+      {
+        "Tool Number": 44.0,
+        "Project": "TOOL-044",
+        "Plant": "Camry",
+        "Shop": "Camry",
+        "Budget Type": "Revenue",
+        "Month": "May",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.1,
+        "No of Tools": 100,
+        "Status": null
+      },
+      {
+        "Tool Number": 45.0,
+        "Project": "TOOL-045",
+        "Plant": "P1",
+        "Shop": "QI",
+        "Budget Type": "Capex",
+        "Month": "May",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.5,
+        "No of Tools": 10,
+        "Status": null
+      },
+      {
+        "Tool Number": 46.0,
+        "Project": "TOOL-046",
+        "Plant": "P2",
+        "Shop": "QC",
+        "Budget Type": "Revenue",
+        "Month": "May",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.9,
+        "No of Tools": 9,
+        "Status": null
+      },
+      {
+        "Tool Number": 47.0,
+        "Project": "TOOL-047",
+        "Plant": "P3",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "May",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.2,
+        "No of Tools": 9,
+        "Status": null
+      },
+      {
+        "Tool Number": 48.0,
+        "Project": "TOOL-048",
+        "Plant": "Camry",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "May",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.5,
+        "No of Tools": 12,
+        "Status": null
+      },
+      {
+        "Tool Number": 49.0,
+        "Project": "TOOL-049",
+        "Plant": "P1",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "May",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.7,
+        "No of Tools": 8,
+        "Status": null
+      },
+      {
+        "Tool Number": 50.0,
+        "Project": "TOOL-050",
+        "Plant": "Others",
+        "Shop": "Others",
+        "Budget Type": "Revenue",
+        "Month": "May",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.8,
+        "No of Tools": 10,
+        "Status": null
+      },
+      {
+        "Tool Number": 51.0,
+        "Project": "TOOL-051",
+        "Plant": "P1",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "June",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.8,
+        "No of Tools": 9,
+        "Status": null
+      },
+      {
+        "Tool Number": 52.0,
+        "Project": "TOOL-052",
+        "Plant": "P2",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "June",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.5,
+        "No of Tools": 11,
+        "Status": null
+      },
+      {
+        "Tool Number": 53.0,
+        "Project": "TOOL-053",
+        "Plant": "P3",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "June",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.1,
+        "No of Tools": 10,
+        "Status": null
+      },
+      {
+        "Tool Number": 54.0,
+        "Project": "TOOL-054",
+        "Plant": "Camry",
+        "Shop": "Camry",
+        "Budget Type": "Revenue",
+        "Month": "June",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.3,
+        "No of Tools": 12,
+        "Status": null
+      },
+      {
+        "Tool Number": 55.0,
+        "Project": "TOOL-055",
+        "Plant": "P1",
+        "Shop": "QI",
+        "Budget Type": "Capex",
+        "Month": "June",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.8,
+        "No of Tools": 11,
+        "Status": null
+      },
+      {
+        "Tool Number": 56.0,
+        "Project": "TOOL-056",
+        "Plant": "P2",
+        "Shop": "QC",
+        "Budget Type": "Revenue",
+        "Month": "June",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.1,
+        "No of Tools": 10,
+        "Status": null
+      },
+      {
+        "Tool Number": 57.0,
+        "Project": "TOOL-057",
+        "Plant": "P3",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "June",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.4,
+        "No of Tools": 10,
+        "Status": null
+      },
+      {
+        "Tool Number": 58.0,
+        "Project": "TOOL-058",
+        "Plant": "Camry",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "June",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.7,
+        "No of Tools": 13,
+        "Status": null
+      },
+      {
+        "Tool Number": 59.0,
+        "Project": "TOOL-059",
+        "Plant": "P1",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "June",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 3.8,
+        "No of Tools": 9,
+        "Status": null
+      },
+      {
+        "Tool Number": 60.0,
+        "Project": "TOOL-060",
+        "Plant": "Others",
+        "Shop": "Others",
+        "Budget Type": "Revenue",
+        "Month": "June",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.1,
+        "No of Tools": 11,
+        "Status": null
+      },
+      {
+        "Tool Number": 61.0,
+        "Project": "TOOL-061",
+        "Plant": "P1",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "July",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.0,
+        "No of Tools": 10,
+        "Status": null
+      },
+      {
+        "Tool Number": 62.0,
+        "Project": "TOOL-062",
+        "Plant": "P2",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "July",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.7,
+        "No of Tools": 100,
+        "Status": null
+      },
+      {
+        "Tool Number": 63.0,
+        "Project": "TOOL-063",
+        "Plant": "P3",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "July",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.3,
+        "No of Tools": 11,
+        "Status": null
+      },
+      {
+        "Tool Number": 64.0,
+        "Project": "TOOL-064",
+        "Plant": "Camry",
+        "Shop": "Camry",
+        "Budget Type": "Revenue",
+        "Month": "July",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.6,
+        "No of Tools": 13,
+        "Status": null
+      },
+      {
+        "Tool Number": 65.0,
+        "Project": "TOOL-065",
+        "Plant": "P1",
+        "Shop": "QI",
+        "Budget Type": "Capex",
+        "Month": "July",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.1,
+        "No of Tools": 12,
+        "Status": null
+      },
+      {
+        "Tool Number": 66.0,
+        "Project": "TOOL-066",
+        "Plant": "P2",
+        "Shop": "QC",
+        "Budget Type": "Revenue",
+        "Month": "July",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.4,
+        "No of Tools": 11,
+        "Status": null
+      },
+      {
+        "Tool Number": 67.0,
+        "Project": "TOOL-067",
+        "Plant": "P3",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "July",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.7,
+        "No of Tools": 11,
+        "Status": null
+      },
+      {
+        "Tool Number": 68.0,
+        "Project": "TOOL-068",
+        "Plant": "Camry",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "July",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 6.1,
+        "No of Tools": 14,
+        "Status": null
+      },
+      {
+        "Tool Number": 69.0,
+        "Project": "TOOL-069",
+        "Plant": "P1",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "July",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.2,
+        "No of Tools": 10,
+        "Status": null
+      },
+      {
+        "Tool Number": 70.0,
+        "Project": "TOOL-070",
+        "Plant": "Others",
+        "Shop": "Others",
+        "Budget Type": "Revenue",
+        "Month": "July",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.4,
+        "No of Tools": 12,
+        "Status": null
+      },
+      {
+        "Tool Number": 71.0,
+        "Project": "TOOL-071",
+        "Plant": "P1",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "August",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.3,
+        "No of Tools": 11,
+        "Status": null
+      },
+      {
+        "Tool Number": 72.0,
+        "Project": "TOOL-072",
+        "Plant": "P2",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "August",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.9,
+        "No of Tools": 13,
+        "Status": null
+      },
+      {
+        "Tool Number": 73.0,
+        "Project": "TOOL-073",
+        "Plant": "P3",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "August",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.6,
+        "No of Tools": 12,
+        "Status": null
+      },
+      {
+        "Tool Number": 74.0,
+        "Project": "TOOL-074",
+        "Plant": "Camry",
+        "Shop": "Camry",
+        "Budget Type": "Revenue",
+        "Month": "August",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.9,
+        "No of Tools": 14,
+        "Status": null
+      },
+      {
+        "Tool Number": 75.0,
+        "Project": "TOOL-075",
+        "Plant": "P1",
+        "Shop": "QI",
+        "Budget Type": "Capex",
+        "Month": "August",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.3,
+        "No of Tools": 13,
+        "Status": null
+      },
+      {
+        "Tool Number": 76.0,
+        "Project": "TOOL-076",
+        "Plant": "P2",
+        "Shop": "QC",
+        "Budget Type": "Revenue",
+        "Month": "August",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.7,
+        "No of Tools": 12,
+        "Status": null
+      },
+      {
+        "Tool Number": 77.0,
+        "Project": "TOOL-077",
+        "Plant": "P3",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "August",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.9,
+        "No of Tools": 12,
+        "Status": null
+      },
+      {
+        "Tool Number": 78.0,
+        "Project": "TOOL-078",
+        "Plant": "Camry",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "August",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 6.2,
+        "No of Tools": 15,
+        "Status": null
+      },
+      {
+        "Tool Number": 79.0,
+        "Project": "TOOL-079",
+        "Plant": "P1",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "August",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.3,
+        "No of Tools": 11,
+        "Status": null
+      },
+      {
+        "Tool Number": 80.0,
+        "Project": "TOOL-080",
+        "Plant": "Others",
+        "Shop": "Others",
+        "Budget Type": "Revenue",
+        "Month": "August",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.5,
+        "No of Tools": 13,
+        "Status": null
+      },
+      {
+        "Tool Number": 81.0,
+        "Project": "TOOL-081",
+        "Plant": "P1",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "September",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.5,
+        "No of Tools": 12,
+        "Status": null
+      },
+      {
+        "Tool Number": 82.0,
+        "Project": "TOOL-082",
+        "Plant": "P2",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "September",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.2,
+        "No of Tools": 14,
+        "Status": null
+      },
+      {
+        "Tool Number": 83.0,
+        "Project": "TOOL-083",
+        "Plant": "P3",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "September",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.8,
+        "No of Tools": 13,
+        "Status": null
+      },
+      {
+        "Tool Number": 84.0,
+        "Project": "TOOL-084",
+        "Plant": "Camry",
+        "Shop": "Camry",
+        "Budget Type": "Revenue",
+        "Month": "September",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 6.2,
+        "No of Tools": 15,
+        "Status": null
+      },
+      {
+        "Tool Number": 85.0,
+        "Project": "TOOL-085",
+        "Plant": "P1",
+        "Shop": "QI",
+        "Budget Type": "Capex",
+        "Month": "September",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.5,
+        "No of Tools": 14,
+        "Status": null
+      },
+      {
+        "Tool Number": 86.0,
+        "Project": "TOOL-086",
+        "Plant": "P2",
+        "Shop": "QC",
+        "Budget Type": "Revenue",
+        "Month": "September",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.9,
+        "No of Tools": 13,
+        "Status": null
+      },
+      {
+        "Tool Number": 87.0,
+        "Project": "TOOL-087",
+        "Plant": "P3",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "September",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.2,
+        "No of Tools": 13,
+        "Status": null
+      },
+      {
+        "Tool Number": 88.0,
+        "Project": "TOOL-088",
+        "Plant": "Camry",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "September",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 6.6,
+        "No of Tools": 16,
+        "Status": null
+      },
+      {
+        "Tool Number": 89.0,
+        "Project": "TOOL-089",
+        "Plant": "P1",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "September",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.7,
+        "No of Tools": 60,
+        "Status": null
+      },
+      {
+        "Tool Number": 90.0,
+        "Project": "TOOL-090",
+        "Plant": "Others",
+        "Shop": "Others",
+        "Budget Type": "Revenue",
+        "Month": "September",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.8,
+        "No of Tools": 14,
+        "Status": null
+      },
+      {
+        "Tool Number": 91.0,
+        "Project": "TOOL-091",
+        "Plant": "P1",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "October",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.8,
+        "No of Tools": 13,
+        "Status": null
+      },
+      {
+        "Tool Number": 92.0,
+        "Project": "TOOL-092",
+        "Plant": "P2",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "October",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.5,
+        "No of Tools": 15,
+        "Status": null
+      },
+      {
+        "Tool Number": 93.0,
+        "Project": "TOOL-093",
+        "Plant": "P3",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "October",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.1,
+        "No of Tools": 14,
+        "Status": null
+      },
+      {
+        "Tool Number": 94.0,
+        "Project": "TOOL-094",
+        "Plant": "Camry",
+        "Shop": "Camry",
+        "Budget Type": "Revenue",
+        "Month": "October",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 6.4,
+        "No of Tools": 16,
+        "Status": null
+      },
+      {
+        "Tool Number": 95.0,
+        "Project": "TOOL-095",
+        "Plant": "P1",
+        "Shop": "QI",
+        "Budget Type": "Capex",
+        "Month": "October",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.8,
+        "No of Tools": 15,
+        "Status": null
+      },
+      {
+        "Tool Number": 96.0,
+        "Project": "TOOL-096",
+        "Plant": "P2",
+        "Shop": "QC",
+        "Budget Type": "Revenue",
+        "Month": "October",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.2,
+        "No of Tools": 14,
+        "Status": null
+      },
+      {
+        "Tool Number": 97.0,
+        "Project": "TOOL-097",
+        "Plant": "P3",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "October",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.4,
+        "No of Tools": 14,
+        "Status": null
+      },
+      {
+        "Tool Number": 98.0,
+        "Project": "TOOL-098",
+        "Plant": "Camry",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "October",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 6.7,
+        "No of Tools": 17,
+        "Status": null
+      },
+      {
+        "Tool Number": 99.0,
+        "Project": "TOOL-099",
+        "Plant": "P1",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "October",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 4.8,
+        "No of Tools": 13,
+        "Status": null
+      },
+      {
+        "Tool Number": 100.0,
+        "Project": "TOOL-100",
+        "Plant": "Others",
+        "Shop": "Others",
+        "Budget Type": "Revenue",
+        "Month": "October",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 6.0,
+        "No of Tools": 15,
+        "Status": null
+      },
+      {
+        "Tool Number": 101.0,
+        "Project": "TOOL-101",
+        "Plant": "P1",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "November",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.0,
+        "No of Tools": 14,
+        "Status": null
+      },
+      {
+        "Tool Number": 102.0,
+        "Project": "TOOL-102",
+        "Plant": "P2",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "November",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.8,
+        "No of Tools": 16,
+        "Status": null
+      },
+      {
+        "Tool Number": 103.0,
+        "Project": "TOOL-103",
+        "Plant": "P3",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "November",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.4,
+        "No of Tools": 15,
+        "Status": null
+      },
+      {
+        "Tool Number": 104.0,
+        "Project": "TOOL-104",
+        "Plant": "Camry",
+        "Shop": "Camry",
+        "Budget Type": "Revenue",
+        "Month": "November",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 6.6,
+        "No of Tools": 17,
+        "Status": null
+      },
+      {
+        "Tool Number": 105.0,
+        "Project": "TOOL-105",
+        "Plant": "P1",
+        "Shop": "QI",
+        "Budget Type": "Capex",
+        "Month": "November",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 6.0,
+        "No of Tools": 16,
+        "Status": null
+      },
+      {
+        "Tool Number": 106.0,
+        "Project": "TOOL-106",
+        "Plant": "P2",
+        "Shop": "QC",
+        "Budget Type": "Revenue",
+        "Month": "November",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.4,
+        "No of Tools": 15,
+        "Status": null
+      },
+      {
+        "Tool Number": 107.0,
+        "Project": "TOOL-107",
+        "Plant": "P3",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "November",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.6,
+        "No of Tools": 15,
+        "Status": null
+      },
+      {
+        "Tool Number": 108.0,
+        "Project": "TOOL-108",
+        "Plant": "Camry",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "November",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 7.0,
+        "No of Tools": 18,
+        "Status": null
+      },
+      {
+        "Tool Number": 109.0,
+        "Project": "TOOL-109",
+        "Plant": "P1",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "November",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.2,
+        "No of Tools": 14,
+        "Status": null
+      },
+      {
+        "Tool Number": 110.0,
+        "Project": "TOOL-110",
+        "Plant": "Others",
+        "Shop": "Others",
+        "Budget Type": "Revenue",
+        "Month": "November",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 6.3,
+        "No of Tools": 16,
+        "Status": null
+      },
+      {
+        "Tool Number": 111.0,
+        "Project": "TOOL-111",
+        "Plant": "P1",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "December",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.2,
+        "No of Tools": 15,
+        "Status": null
+      },
+      {
+        "Tool Number": 112.0,
+        "Project": "TOOL-112",
+        "Plant": "P2",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "December",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.9,
+        "No of Tools": 6,
+        "Status": null
+      },
+      {
+        "Tool Number": 113.0,
+        "Project": "TOOL-113",
+        "Plant": "P3",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "December",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.6,
+        "No of Tools": 42,
+        "Status": null
+      },
+      {
+        "Tool Number": 114.0,
+        "Project": "TOOL-114",
+        "Plant": "Camry",
+        "Shop": "Camry",
+        "Budget Type": "Revenue",
+        "Month": "December",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 6.9,
+        "No of Tools": 10,
+        "Status": null
+      },
+      {
+        "Tool Number": 115.0,
+        "Project": "TOOL-115",
+        "Plant": "P1",
+        "Shop": "QI",
+        "Budget Type": "Capex",
+        "Month": "December",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 6.3,
+        "No of Tools": 30,
+        "Status": null
+      },
+      {
+        "Tool Number": 116.0,
+        "Project": "TOOL-116",
+        "Plant": "P2",
+        "Shop": "QC",
+        "Budget Type": "Revenue",
+        "Month": "December",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.6,
+        "No of Tools": 17,
+        "Status": null
+      },
+      {
+        "Tool Number": 117.0,
+        "Project": "TOOL-117",
+        "Plant": "P3",
+        "Shop": "Press",
+        "Budget Type": "Capex",
+        "Month": "December",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.9,
+        "No of Tools": 16,
+        "Status": null
+      },
+      {
+        "Tool Number": 118.0,
+        "Project": "TOOL-118",
+        "Plant": "Camry",
+        "Shop": "Weld",
+        "Budget Type": "Revenue",
+        "Month": "December",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 7.3,
+        "No of Tools": 140,
+        "Status": null
+      },
+      {
+        "Tool Number": 119.0,
+        "Project": "TOOL-119",
+        "Plant": "P1",
+        "Shop": "Assy",
+        "Budget Type": "Capex",
+        "Month": "December",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 5.4,
+        "No of Tools": 90,
+        "Status": null
+      },
+      {
+        "Tool Number": 120.0,
+        "Project": "TOOL-120",
+        "Plant": "Others",
+        "Shop": "Others",
+        "Budget Type": "Revenue",
+        "Month": "December",
+        "Handover Date": null,
+        "Design PIC": null,
+        "Installation PIC": null,
+        "In Mill": 6.5,
+        "No of Tools": 80,
+        "Status": null
+      }
+    ]
+  },
+  "kesh_komi": {
+    "entries": [
+      {
+        "sl_no": 1,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "XYZ",
+        "target_date": "2026-06-26",
+        "status": "Incomplete",
+        "high_priority": false,
+        "month": "Jun 2026"
+      },
+      {
+        "sl_no": 2,
+        "kadai_point": "Assembly Delay",
+        "action_plan": "Work On Requirements",
+        "responsibility": "JJHG",
+        "target_date": "2026-06-27",
+        "status": "Incomplete",
+        "high_priority": false,
+        "month": "Jun 2026"
+      },
+      {
+        "sl_no": 2,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-06-28",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Jun 2026"
+      },
+      {
+        "sl_no": 4,
+        "kadai_point": "hcgcg",
+        "action_plan": "gfhgh",
+        "responsibility": "MNK",
+        "target_date": "2026-06-29",
+        "status": "Partially Complete",
+        "high_priority": false,
+        "month": "Jun 2026"
+      },
+      {
+        "sl_no": 2,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-06-28",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Jun 2026"
+      },
+      {
+        "sl_no": 3,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-06-29",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Jun 2026"
+      },
+      {
+        "sl_no": 4,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-06-30",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Jun 2026"
+      },
+      {
+        "sl_no": 5,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-07-01",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Jul 2026"
+      },
+      {
+        "sl_no": 6,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-07-02",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Jul 2026"
+      },
+      {
+        "sl_no": 7,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-07-03",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Jul 2026"
+      },
+      {
+        "sl_no": 8,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-07-04",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Jul 2026"
+      },
+      {
+        "sl_no": 9,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-07-05",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Jul 2026"
+      },
+      {
+        "sl_no": 10,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-07-06",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Jul 2026"
+      },
+      {
+        "sl_no": 11,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-07-07",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Jul 2026"
+      },
+      {
+        "sl_no": 12,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-08-08",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Aug 2026"
+      },
+      {
+        "sl_no": 13,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-08-09",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Aug 2026"
+      },
+      {
+        "sl_no": 14,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-08-10",
+        "status": "Complete",
+        "high_priority": false,
+        "month": "Aug 2026"
+      },
+      {
+        "sl_no": 15,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2026-08-11",
+        "status": "Incomplete",
+        "high_priority": false,
+        "month": "Aug 2026"
+      },
+      {
+        "sl_no": 16,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2027-08-12",
+        "status": "Incomplete",
+        "high_priority": false,
+        "month": "Aug 2027"
+      },
+      {
+        "sl_no": 17,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2027-08-13",
+        "status": "Incomplete",
+        "high_priority": false,
+        "month": "Aug 2027"
+      },
+      {
+        "sl_no": 18,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2027-08-14",
+        "status": "Incomplete",
+        "high_priority": false,
+        "month": "Aug 2027"
+      },
+      {
+        "sl_no": 19,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2027-08-15",
+        "status": "Incomplete",
+        "high_priority": false,
+        "month": "Aug 2027"
+      },
+      {
+        "sl_no": 20,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2027-08-16",
+        "status": "Incomplete",
+        "high_priority": false,
+        "month": "Aug 2027"
+      },
+      {
+        "sl_no": 21,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2027-08-17",
+        "status": "Incomplete",
+        "high_priority": false,
+        "month": "Aug 2027"
+      },
+      {
+        "sl_no": 22,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2027-08-18",
+        "status": "Incomplete",
+        "high_priority": false,
+        "month": "Aug 2027"
+      },
+      {
+        "sl_no": 23,
+        "kadai_point": "Production Delay",
+        "action_plan": "Increase Resourse",
+        "responsibility": "KJH",
+        "target_date": "2027-08-19",
+        "status": "Incomplete",
+        "high_priority": false,
+        "month": "Aug 2027"
+      }
+    ],
+    "status_distribution": [
+      {
+        "status": "Complete",
+        "count": 14,
+        "pct": 53.8
+      },
+      {
+        "status": "Incomplete",
+        "count": 11,
+        "pct": 42.3
+      },
+      {
+        "status": "Partially Complete",
+        "count": 1,
+        "pct": 3.8
+      }
+    ],
+    "monthly_breakdown": [
+      {
+        "month": "Aug 2026",
+        "status": "Complete",
+        "count": 3
+      },
+      {
+        "month": "Aug 2026",
+        "status": "Incomplete",
+        "count": 1
+      },
+      {
+        "month": "Aug 2027",
+        "status": "Incomplete",
+        "count": 8
+      },
+      {
+        "month": "Jul 2026",
+        "status": "Complete",
+        "count": 7
+      },
+      {
+        "month": "Jun 2026",
+        "status": "Complete",
+        "count": 4
+      },
+      {
+        "month": "Jun 2026",
+        "status": "Incomplete",
+        "count": 2
+      },
+      {
+        "month": "Jun 2026",
+        "status": "Partially Complete",
+        "count": 1
+      }
+    ],
+    "monthly_hp_breakdown": [],
+    "total_entries": 26,
+    "high_priority": 0,
+    "completed": 0,
+    "partial": 0,
+    "incomplete": 11
+  },
+  "ecr": {
+    "by_month": [
+      {
+        "Month": "Apr-26",
+        "Total Queries": 70,
+        "Queries Accepted": 50,
+        "Conversion Ratio": 71.4,
+        "Average Conversion Ratio": 67.0
+      },
+      {
+        "Month": "May-26",
+        "Total Queries": 56,
+        "Queries Accepted": 20,
+        "Conversion Ratio": 35.7,
+        "Average Conversion Ratio": 0.0
+      },
+      {
+        "Month": "Jun-26",
+        "Total Queries": 78,
+        "Queries Accepted": 60,
+        "Conversion Ratio": 76.9,
+        "Average Conversion Ratio": 0.0
+      },
+      {
+        "Month": "Jul-26",
+        "Total Queries": 68,
+        "Queries Accepted": 60,
+        "Conversion Ratio": 88.2,
+        "Average Conversion Ratio": 0.0
+      },
+      {
+        "Month": "Aug-26",
+        "Total Queries": 77,
+        "Queries Accepted": 56,
+        "Conversion Ratio": 72.7,
+        "Average Conversion Ratio": 0.0
+      },
+      {
+        "Month": "Sep-26",
+        "Total Queries": 90,
+        "Queries Accepted": 22,
+        "Conversion Ratio": 24.4,
+        "Average Conversion Ratio": 0.0
+      },
+      {
+        "Month": "Oct-26",
+        "Total Queries": 334,
+        "Queries Accepted": 300,
+        "Conversion Ratio": 89.8,
+        "Average Conversion Ratio": 0.0
+      },
+      {
+        "Month": "Nov-26",
+        "Total Queries": 56,
+        "Queries Accepted": 45,
+        "Conversion Ratio": 80.4,
+        "Average Conversion Ratio": 0.0
+      },
+      {
+        "Month": "Dec-26",
+        "Total Queries": 12,
+        "Queries Accepted": 10,
+        "Conversion Ratio": 83.3,
+        "Average Conversion Ratio": 0.0
+      },
+      {
+        "Month": "Jan-27",
+        "Total Queries": 67,
+        "Queries Accepted": 23,
+        "Conversion Ratio": 34.3,
+        "Average Conversion Ratio": 0.0
+      },
+      {
+        "Month": "Feb-27",
+        "Total Queries": 77,
+        "Queries Accepted": 45,
+        "Conversion Ratio": 58.4,
+        "Average Conversion Ratio": 0.0
+      },
+      {
+        "Month": "Mar-27",
+        "Total Queries": 90,
+        "Queries Accepted": 80,
+        "Conversion Ratio": 88.9,
+        "Average Conversion Ratio": 0.0
+      }
+    ],
+    "avg_conversion": 67.0,
+    "total_queries": 1075,
+    "total_accepted": 771
+  }
+}

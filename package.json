@@ -1,0 +1,25 @@
+{
+  "name": "manufacturing-analytics",
+  "version": "1.0.0",
+  "description": "Manufacturing Analytics Dashboard with auto-update on file changes",
+  "main": "watch.js",
+  "scripts": {
+    "dev": "node watch.js",
+    "build": "python3 process_analytics.py",
+    "build:watch": "concurrently \"npm run dev\" \"npm run build:auto\"",
+    "build:auto": "node auto-build.js"
+  },
+  "keywords": [
+    "analytics",
+    "dashboard",
+    "manufacturing"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "chokidar": "^3.5.3"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

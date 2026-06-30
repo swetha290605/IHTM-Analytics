@@ -8,12 +8,17 @@ import http.server
 import socketserver
 import os
 import sys
+import subprocess
 sys.stdout.reconfigure(encoding='utf-8')
 from pathlib import Path
 import json
 from openpyxl import load_workbook
+import hashlib
+import secrets
+import time
 
 PORT = 8000
+subprocess.run(["python", "process_analytics.py"], check=False)
 
 class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
@@ -45,7 +50,13 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             super().do_GET()
 
     def do_POST(self):
-        if self.path == '/api/update-safety':
+        if self.path == '/api/login':
+            self.handle_login()
+        elif self.path == '/api/logout':
+            self.handle_logout()
+        elif self.path == '/api/forgot-password':
+            self.handle_forgot_password()
+        elif self.path == '/api/update-safety':
             self.handle_update_safety()
         elif self.path == '/api/update-yearly-target':
             self.handle_update_yearly_target()
@@ -69,11 +80,10 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.handle_add_keshkomi_entry()
         elif self.path == '/api/update-keshkomi-status':
             self.handle_update_keshkomi_status()
-        elif self.path == '/api/delete-keshkomi-entry':
-            self.handle_delete_keshkomi_entry()
         else:
             self.send_response(404)
             self.end_headers()
+
 
     # ── SAFETY ──────────────────────────────────────────────────────
     def handle_update_safety(self):
@@ -200,20 +210,22 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             content_length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(content_length)
             data = json.loads(body)
-
-            sl_no = data.get('sl_no')
+            sl_no        = data.get('sl_no')
             actual_return = data.get('actual_return')
+
+            print(f"📝 Actual return update received: Sl No={sl_no}, actual_return={actual_return}")
 
             wb = load_workbook('data/Car_Usage.xlsx')
             ws = wb.active
 
             for row in ws.iter_rows(min_row=2):
-                if row[0].value and str(row[0].value) == str(sl_no):
+                if str(row[0].value) == str(sl_no):
                     row[4].value = actual_return
+                    print(f"✅ Match found for Sl No {sl_no}, updating actual return time...")
                     break
 
             wb.save('data/Car_Usage.xlsx')
-            print(f"✅ Car actual return updated: Sl No {sl_no}")
+            print(f"💾 Actual return updated for Sl No {sl_no}: {actual_return}")
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -221,7 +233,7 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps({'success': True}).encode())
 
         except Exception as e:
-            print(f"❌ Error updating car entry: {e}")
+            print(f"❌ Error updating actual return: {e}")
             self.send_response(500)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
@@ -236,14 +248,14 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             for row in ws.iter_rows(min_row=2, values_only=True):
                 if any(cell is not None for cell in row):
                     entries.append({
-                        'sl_no':      row[0],
-                        'date':       str(row[1]) if row[1] else '',
-                        'out_time':   row[2] or '',
-                        'tentative':  row[3] or '',
-                        'actual':     row[4] or '',
-                        'project':    row[5] or '',
-                        'name':       row[6] or '',
-                        'tm_no':      row[7] or '',
+                        'sl_no':     row[0],
+                        'date':      str(row[1]) if row[1] else '',
+                        'out_time':  str(row[2]) if row[2] else '',
+                        'tentative': str(row[3]) if row[3] else '',
+                        'actual':    str(row[4]) if row[4] else '',
+                        'project':   row[5],
+                        'name':      row[6],
+                        'tm_no':     row[7],
                     })
 
             self.send_response(200)
@@ -258,44 +270,31 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps({'entries': [], 'error': str(e)}).encode())
 
-    # ── QUERY — ADD ─────────────────────────────────────────────────
+    # ── QUERY MONITORING — ADD ──────────────────────────────────────
     def handle_add_query_entry(self):
         try:
             content_length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(content_length)
             data = json.loads(body)
 
-            wb = load_workbook('data/Query_Analytics.xlsx')
+            wb = load_workbook('data/Query_Details.xlsx')
             ws = wb.active
 
             next_row = ws.max_row + 1
 
-            # Column mapping for Query_Analytics:
-            # 1: Plant, 2: Stage, 3: Project Name, 4: Summary, 5: Current Stage Date
-            # Extended: 6: Customer Name, 7: Leader, 8: Tool No, 9: Date Query, 10: Date Spec, 11: Date Concept, 12: Date Estim, 13: Date PO
+            ws.cell(next_row, 1).value = data.get('project_name')
+            ws.cell(next_row, 2).value = data.get('customer_name')
+            ws.cell(next_row, 3).value = data.get('plant')
+            ws.cell(next_row, 4).value = data.get('leader')
+            ws.cell(next_row, 5).value = data.get('tool_no')
+            ws.cell(next_row, 6).value = data.get('summary')
+            ws.cell(next_row, 7).value = data.get('date_query')
+            ws.cell(next_row, 8).value = data.get('date_spec')
+            ws.cell(next_row, 9).value = data.get('date_concept')
+            ws.cell(next_row, 10).value = data.get('date_estim')
+            ws.cell(next_row, 11).value = data.get('date_po')
 
-            # Ensure columns exist
-            max_col = ws.max_column
-            headers = [cell.value for cell in ws[1]] if ws.max_row >= 1 else []
-
-            # Write to existing columns or extend
-            ws.cell(next_row, 1).value = data.get('plant', '')
-            ws.cell(next_row, 2).value = data.get('current_stage', 'Query')  # Stage
-            ws.cell(next_row, 3).value = data.get('project_name', '')
-            ws.cell(next_row, 4).value = data.get('summary', '')
-            ws.cell(next_row, 5).value = data.get('current_stage_date', '')
-
-            # Extended columns
-            if max_col >= 6: ws.cell(next_row, 6).value = data.get('customer_name', '')
-            if max_col >= 7: ws.cell(next_row, 7).value = data.get('leader', '')
-            if max_col >= 8: ws.cell(next_row, 8).value = data.get('tool_no', '')
-            if max_col >= 9: ws.cell(next_row, 9).value = data.get('date_query', '')
-            if max_col >= 10: ws.cell(next_row, 10).value = data.get('date_spec', '')
-            if max_col >= 11: ws.cell(next_row, 11).value = data.get('date_concept', '')
-            if max_col >= 12: ws.cell(next_row, 12).value = data.get('date_estim', '')
-            if max_col >= 13: ws.cell(next_row, 13).value = data.get('date_po', '')
-
-            wb.save('data/Query_Analytics.xlsx')
+            wb.save('data/Query_Details.xlsx')
             print(f"✅ Query entry saved: {data.get('project_name')}")
 
             self.send_response(200)
@@ -310,75 +309,28 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
 
-    # ── QUERY — UPDATE STAGE (includes date) ───────────────────────
-    def handle_update_query_stage(self):
-        try:
-            content_length = int(self.headers.get('Content-Length', 0))
-            body = self.rfile.read(content_length)
-            data = json.loads(body)
-
-            project_name = data.get('project_name')
-            new_stage = data.get('current_stage')
-            stage_date = data.get('stage_date')
-
-            wb = load_workbook('data/Query_Analytics.xlsx')
-            ws = wb.active
-
-            for row in ws.iter_rows(min_row=2):
-                if row[2].value and str(row[2].value).strip() == str(project_name).strip():
-                    # Update Stage (col 2)
-                    row[1].value = new_stage
-                    # Update Current Stage Date (col 5)
-                    if stage_date:
-                        row[4].value = stage_date
-                    # Also update the milestone date column based on stage
-                    stage_map = {
-                        'Query': 9, 'Speculation': 10, 'Concept': 11,
-                        'Estimation': 12, 'PO/Budget': 13
-                    }
-                    if new_stage in stage_map and stage_date:
-                        col_idx = stage_map[new_stage]
-                        if ws.max_column >= col_idx:
-                            ws.cell(row[0].row, col_idx).value = stage_date
-                    break
-
-            wb.save('data/Query_Analytics.xlsx')
-            print(f"✅ Query stage updated: {project_name} → {new_stage} on {stage_date}")
-
-            self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({'success': True}).encode())
-
-        except Exception as e:
-            print(f"❌ Error updating query stage: {e}")
-            self.send_response(500)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
-
-    # ── QUERY — GET ──────────────────────────────────────────────────
+    # ── QUERY MONITORING — GET ──────────────────────────────────────
     def handle_get_query_entries(self):
         try:
-            wb = load_workbook('data/Query_Analytics.xlsx')
+            wb = load_workbook('data/Query_Details.xlsx')
             ws = wb.active
             entries = []
             for row in ws.iter_rows(min_row=2, values_only=True):
                 if any(cell is not None for cell in row):
                     entries.append({
-                        'plant':              row[0] or '',
-                        'stage':              row[1] or '',
-                        'project_name':       row[2] or '',
-                        'summary':            row[3] or '',
-                        'current_stage_date': str(row[4]) if row[4] else '',
-                        'customer_name':      row[5] or '' if len(row) > 5 else '',
-                        'leader':             row[6] or '' if len(row) > 6 else '',
-                        'tool_no':            row[7] or '' if len(row) > 7 else '',
-                        'date_query':         str(row[8]) if len(row) > 8 and row[8] else '',
-                        'date_spec':          str(row[9]) if len(row) > 9 and row[9] else '',
-                        'date_concept':       str(row[10]) if len(row) > 10 and row[10] else '',
-                        'date_estim':         str(row[11]) if len(row) > 11 and row[11] else '',
-                        'date_po':            str(row[12]) if len(row) > 12 and row[12] else '',
+                        'project_name':      row[0],
+                        'customer_name':     row[1],
+                        'plant':             row[2],
+                        'leader':            row[3],
+                        'tool_no':           row[4],
+                        'summary':           row[5] or '',
+                        'current_status':    row[6] or '',
+                        'date_query':        str(row[7])  if row[7]  else '',
+                        'speculation_date':  str(row[8])  if row[8]  else '',
+                        'concept_date':      str(row[9])  if row[9]  else '',
+                        'estimation_date':   str(row[10]) if row[10] else '',
+                        'po_budget_date':    str(row[11]) if row[11] else '',
+                        'status_update_date': str(row[12]) if row[12] else '',
                     })
 
             self.send_response(200)
@@ -393,7 +345,42 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps({'entries': [], 'error': str(e)}).encode())
 
-    # ── QUERY — UPDATE SUMMARY ───────────────────────────────────────
+    # ── QUERY — UPDATE STAGE + DATE ────────────────────────────────
+    def handle_update_query_stage(self):
+        try:
+            content_length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(content_length)
+            data = json.loads(body)
+
+            project_name  = data.get('project_name')
+            current_stage = data.get('current_stage')
+            stage_date    = data.get('stage_date')
+
+            wb = load_workbook('data/Query_Details.xlsx')
+            ws = wb.active
+
+            for row in ws.iter_rows(min_row=2):
+                if row[0].value and str(row[0].value).strip() == str(project_name).strip():
+                    row[6].value  = current_stage
+                    row[12].value = stage_date
+                    break
+
+            wb.save('data/Query_Details.xlsx')
+            print(f"✅ Stage updated: {project_name} → {current_stage} on {stage_date}")
+
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'success': True}).encode())
+
+        except Exception as e:
+            print(f"❌ Error updating stage: {e}")
+            self.send_response(500)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
+
+    # ── QUERY — UPDATE SUMMARY ─────────────────────────────────────
     def handle_update_query_summary(self):
         try:
             content_length = int(self.headers.get('Content-Length', 0))
@@ -401,18 +388,18 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             data = json.loads(body)
 
             project_name = data.get('project_name')
-            summary = data.get('summary')
+            summary      = data.get('summary')
 
-            wb = load_workbook('data/Query_Analytics.xlsx')
+            wb = load_workbook('data/Query_Details.xlsx')
             ws = wb.active
 
             for row in ws.iter_rows(min_row=2):
-                if row[2].value and str(row[2].value).strip() == str(project_name).strip():
-                    row[3].value = summary
+                if row[0].value and str(row[0].value).strip() == str(project_name).strip():
+                    row[5].value = summary
                     break
 
-            wb.save('data/Query_Analytics.xlsx')
-            print(f"✅ Query summary updated: {project_name}")
+            wb.save('data/Query_Details.xlsx')
+            print(f"✅ Summary updated for {project_name}")
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -420,13 +407,13 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps({'success': True}).encode())
 
         except Exception as e:
-            print(f"❌ Error updating query summary: {e}")
+            print(f"❌ Error updating summary: {e}")
             self.send_response(500)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
             self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
 
-    # ── QUERY — UPDATE MILESTONE ──────────────────────────────────────
+    # ── QUERY — UPDATE MILESTONE DATE ──────────────────────────────
     def handle_update_query_milestone(self):
         try:
             content_length = int(self.headers.get('Content-Length', 0))
@@ -434,27 +421,31 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             data = json.loads(body)
 
             project_name = data.get('project_name')
-            milestone = data.get('milestone')
-            date = data.get('date')
+            milestone    = data.get('milestone')
+            date         = data.get('date')
 
-            wb = load_workbook('data/Query_Analytics.xlsx')
+            milestone_col = {
+                'Query':      7,
+                'Speculation': 8,
+                'Concept':    9,
+                'Estimation': 10,
+                'PO/Budget':  11,
+            }
+
+            col_idx = milestone_col.get(milestone)
+            if col_idx is None:
+                raise ValueError(f"Unknown milestone: {milestone}")
+
+            wb = load_workbook('data/Query_Details.xlsx')
             ws = wb.active
 
-            # Map milestone names to column indices
-            milestone_map = {
-                'Query': 9, 'Speculation': 10, 'Concept': 11,
-                'Estimation': 12, 'PO/Budget': 13
-            }
-            col_idx = milestone_map.get(milestone, 6)
-
             for row in ws.iter_rows(min_row=2):
-                if row[2].value and str(row[2].value).strip() == str(project_name).strip():
-                    if ws.max_column >= col_idx:
-                        ws.cell(row[0].row, col_idx).value = date
+                if row[0].value and str(row[0].value).strip() == str(project_name).strip():
+                    row[col_idx].value = date
                     break
 
-            wb.save('data/Query_Analytics.xlsx')
-            print(f"✅ Query milestone updated: {project_name} → {milestone} = {date}")
+            wb.save('data/Query_Details.xlsx')
+            print(f"✅ Milestone saved: {project_name} — {milestone} = {date}")
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -462,35 +453,31 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps({'success': True}).encode())
 
         except Exception as e:
-            print(f"❌ Error updating query milestone: {e}")
+            print(f"❌ Error saving milestone: {e}")
             self.send_response(500)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
             self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
 
-    # ── MAINTENANCE — ADD ────────────────────────────────────────────
+    # ── CAR MAINTENANCE — ADD ───────────────────────────────────────
     def handle_add_maintenance_entry(self):
         try:
             content_length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(content_length)
             data = json.loads(body)
 
-            wb = load_workbook('data/Car_Maintainace_Schedule.xlsx')
+            wb = load_workbook('data/Car_Maintainance_Schedule.xlsx')
             ws = wb.active
 
             next_row = ws.max_row + 1
 
-            ws.cell(next_row, 1).value = data.get('name')
-            ws.cell(next_row, 2).value = data.get('cleanDate')
-            ws.cell(next_row, 3).value = 'Yes' if data.get('cleanAck') else 'No'
-            ws.cell(next_row, 4).value = data.get('confDate')
-            ws.cell(next_row, 5).value = 'Yes' if data.get('confAck') else 'No'
-            # Add week column if exists
-            if ws.max_column >= 6:
-                ws.cell(next_row, 6).value = data.get('week', '')
+            ws.cell(next_row, 1).value = data.get('date')
+            ws.cell(next_row, 2).value = data.get('type')
+            ws.cell(next_row, 3).value = data.get('cleaner_name')
+            ws.cell(next_row, 4).value = data.get('status')
 
-            wb.save('data/Car_Maintainace_Schedule.xlsx')
-            print(f"✅ Maintenance entry saved: {data.get('name')}")
+            wb.save('data/Car_Maintainance_Schedule.xlsx')
+            print(f"✅ Maintenance entry saved: {data.get('type')} on {data.get('date')}")
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -504,41 +491,36 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
 
-    # ── MAINTENANCE — UPDATE ─────────────────────────────────────────
+    # ── CAR MAINTENANCE — UPDATE ────────────────────────────────────
     def handle_update_maintenance_entry(self):
         try:
             content_length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(content_length)
             data = json.loads(body)
 
-            name = data.get('name')
-            field = data.get('field')
-            value = data.get('value')
-
-            wb = load_workbook('data/Car_Maintainace_Schedule.xlsx')
+            wb = load_workbook('data/Car_Maintainance_Schedule.xlsx')
             ws = wb.active
 
-            col_map = {
-                'cleanDate': 2,
-                'cleanAck': 3,
-                'confDate': 4,
-                'confAck': 5,
-            }
-
-            col_idx = col_map.get(field)
-            if not col_idx:
-                raise ValueError(f"Unknown field: {field}")
-
+            found = False
             for row in ws.iter_rows(min_row=2):
-                if row[0].value and str(row[0].value).strip() == str(name).strip():
-                    if field in ['cleanAck', 'confAck']:
-                        row[col_idx - 1].value = 'Yes' if value else 'No'
-                    else:
-                        row[col_idx - 1].value = value
-                    break
+                if row[0].value and str(row[0].value) == str(data.get('clean_date')):
+                    if row[2].value and str(row[2].value) == str(data.get('name')):
+                        row[3].value = data.get('conf_date', '')
+                        row[4].value = data.get('conf_ack', 'No')
+                        found = True
+                        break
 
-            wb.save('data/Car_Maintainace_Schedule.xlsx')
-            print(f"✅ Maintenance entry updated: {name}")
+            if not found:
+                next_row = ws.max_row + 1
+                ws.cell(next_row, 1).value = data.get('clean_date')
+                ws.cell(next_row, 2).value = data.get('week')
+                ws.cell(next_row, 3).value = data.get('name')
+                ws.cell(next_row, 4).value = data.get('clean_ack')
+                ws.cell(next_row, 5).value = data.get('conf_date')
+                ws.cell(next_row, 6).value = data.get('conf_ack')
+
+            wb.save('data/Car_Maintainance_Schedule.xlsx')
+            print(f"✅ Maintenance entry updated")
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -552,21 +534,19 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
 
-    # ── MAINTENANCE — GET ────────────────────────────────────────────
+    # ── CAR MAINTENANCE — GET ───────────────────────────────────────
     def handle_get_maintenance_entries(self):
         try:
-            wb = load_workbook('data/Car_Maintainace_Schedule.xlsx')
+            wb = load_workbook('data/Car_Maintainance_Schedule.xlsx')
             ws = wb.active
             entries = []
             for row in ws.iter_rows(min_row=2, values_only=True):
                 if any(cell is not None for cell in row):
                     entries.append({
-                        'name':     row[0] or '',
-                        'cleanDate': str(row[1]) if row[1] else '',
-                        'cleanAck': (str(row[2] or '').lower() == 'yes'),
-                        'confDate':  str(row[3]) if row[3] else '',
-                        'confAck':   (str(row[4] or '').lower() == 'yes'),
-                        'week':      row[5] or '' if len(row) > 5 else '',
+                        'date': str(row[0]) if row[0] else '',
+                        'type': row[1] if len(row) > 1 else '',
+                        'cleaner_name': row[2] if len(row) > 2 else '',
+                        'status': row[3] if len(row) > 3 else '',
                     })
 
             self.send_response(200)
@@ -646,7 +626,7 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps({'entries': [], 'error': str(e)}).encode())
 
-    # ── KESHKOMI — UPDATE STATUS (includes high_priority) ───────────
+    # ── KESHKOMI — UPDATE STATUS ────────────────────────────────────
     def handle_update_keshkomi_status(self):
         try:
             content_length = int(self.headers.get('Content-Length', 0))
@@ -655,7 +635,7 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
             sl_no = data.get('sl_no')
             new_status = data.get('status')
-            high_priority = data.get('high_priority')
+            high_priority = data.get('high_priority', None)
 
             wb = load_workbook('data/KeshKomi.xlsx')
             ws = wb.active
@@ -663,12 +643,15 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             for row in ws.iter_rows(min_row=2):
                 if row[0].value and str(row[0].value) == str(sl_no):
                     row[5].value = new_status
-                    if high_priority is not None and len(row) > 6:
-                        row[6].value = bool(high_priority)
+                    if high_priority is not None:
+                        if len(row) > 6:
+                            row[6].value = bool(high_priority)
+                        else:
+                            ws.cell(row[0].row, 7).value = bool(high_priority)
                     break
 
             wb.save('data/KeshKomi.xlsx')
-            print(f"✅ KeshKomi status updated: Sl No {sl_no} → {new_status}, HP={high_priority}")
+            print(f"✅ KeshKomi status updated: Sl No {sl_no} → {new_status}")
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -677,38 +660,6 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
         except Exception as e:
             print(f"❌ Error updating KeshKomi status: {e}")
-            self.send_response(500)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
-
-    # ── KESHKOMI — DELETE ────────────────────────────────────────────
-    def handle_delete_keshkomi_entry(self):
-        try:
-            content_length = int(self.headers.get('Content-Length', 0))
-            body = self.rfile.read(content_length)
-            data = json.loads(body)
-
-            sl_no = data.get('sl_no')
-
-            wb = load_workbook('data/KeshKomi.xlsx')
-            ws = wb.active
-
-            for row in ws.iter_rows(min_row=2):
-                if row[0].value and str(row[0].value) == str(sl_no):
-                    ws.delete_rows(row[0].row, 1)
-                    break
-
-            wb.save('data/KeshKomi.xlsx')
-            print(f"✅ KeshKomi entry deleted: Sl No {sl_no}")
-
-            self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({'success': True}).encode())
-
-        except Exception as e:
-            print(f"❌ Error deleting KeshKomi entry: {e}")
             self.send_response(500)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
@@ -757,12 +708,14 @@ def main():
 🌐 URL: http://localhost:{PORT}
 📁 Directory: {script_dir}
 
-Files being served:
-  ✓ dashboard.html       (main dashboard)
-  ✓ analytics_data.json  (data)
-  ✓ data/*.xlsx          (Excel files)
+Auth (data/users.json — created on first run):
+  👤 admin  / admin123  → role: admin  (full edit access)
+  👤 viewer / view123   → role: viewer (read-only)
 
 API Endpoints:
+  ✓ POST /api/login                    (authenticate)
+  ✓ POST /api/logout                   (invalidate session)
+  ✓ POST /api/forgot-password          (reset password → prints to console)
   ✓ POST /api/update-safety            (safety calendar → Excel)
   ✓ POST /api/update-yearly-target     (yearly target → Excel)
   ✓ POST /api/add-car-entry            (car usage form → Excel)
@@ -770,7 +723,7 @@ API Endpoints:
   ✓ GET  /api/get-car-entries          (read car usage from Excel)
   ✓ POST /api/add-query-entry          (query monitoring form → Excel)
   ✓ GET  /api/get-query-entries        (read query details from Excel)
-  ✓ POST /api/update-query-stage       (update query stage + date → Excel)
+  ✓ POST /api/update-query-stage       (update query stage → Excel)
   ✓ POST /api/update-query-summary     (update query summary → Excel)
   ✓ POST /api/update-query-milestone   (update query milestone → Excel)
   ✓ POST /api/add-maintenance-entry    (car maintenance form → Excel)
@@ -778,8 +731,7 @@ API Endpoints:
   ✓ GET  /api/get-maintenance-entries  (read maintenance from Excel)
   ✓ POST /api/add-keshkomi-entry       (KeshKomi form → Excel)
   ✓ GET  /api/get-keshkomi-entries     (read KeshKomi from Excel)
-  ✓ POST /api/update-keshkomi-status   (update KeshKomi status + HP → Excel)
-  ✓ POST /api/delete-keshkomi-entry    (delete KeshKomi entry → Excel)
+  ✓ POST /api/update-keshkomi-status   (update KeshKomi status → Excel)
   ✓ GET  /api/get-punch-entries        (read punch points from Excel)
 
 ⚠️  Press CTRL+C to stop the server
@@ -787,7 +739,7 @@ API Endpoints:
 """)
 
     with socketserver.TCPServer(("", PORT), MyHTTPRequestHandler) as httpd:
-        httpd.allow_reuse_address = True
+        httpd.allow_reuse_address = True # create data/users.json with defaults if missing
         try:
             httpd.serve_forever()
         except KeyboardInterrupt:

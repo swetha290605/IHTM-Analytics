@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+"""
+Modified Analytics Processor for Month Format: Apr-26, May-26, Jun-26
+Works with short month-year format instead of full month names
+"""
+
 import json
 from pathlib import Path
 import numpy as np
@@ -22,7 +28,7 @@ DATA_DIR.mkdir(exist_ok=True)
 def load_excel(filename):
     path = DATA_DIR / filename
     if path.exists():
-        df = pd.read_excel(path)
+        df = pd.read_excel(path, dtype=str)
         print(f"✅ Loaded: {filename}")
         return df
     else:
@@ -95,14 +101,22 @@ def build_safety():
     d["No of Accidents"] = to_num(d["No of Accidents"])
     d = d.dropna(subset=["No of Accidents"])
 
-    # Add Year column so JS year-filter works
-    MONTH_TO_YEAR = {
-        'January': '2026', 'February': '2026', 'March': '2026', 'April': '2026',
-        'May': '2026', 'June': '2026', 'July': '2026', 'August': '2026',
-        'September': '2026', 'October': '2026', 'November': '2026', 'December': '2026',
-    }
+    # Add Year column - extract from Month (Apr-26 → 2026)
+    def extract_year(month_str):
+        try:
+            if pd.isna(month_str) or month_str == '':
+                return '2026'
+            parts = str(month_str).split('-')
+            if len(parts) >= 2:
+                year_2digit = parts[-1]
+                year_4digit = '20' + year_2digit if len(year_2digit) == 2 else year_2digit
+                return year_4digit
+            return '2026'
+        except:
+            return '2026'
+    
     if "Year" not in d.columns:
-        d["Year"] = d["Month"].map(MONTH_TO_YEAR).fillna('2026')
+        d["Year"] = d["Month"].apply(extract_year)
 
     month_accidents = safe_records(d[["Month", "Year", "No of Accidents"]])
 
@@ -154,7 +168,6 @@ def build_revenue():
     else 0
     )
 
-    # Build per-month array for the chart
     rev_by_month = safe_records(d[["Month", "Revenue (Million Rs)", "Target (Million Rs)"]].dropna(subset=["Month"]))
 
     return {
@@ -178,14 +191,22 @@ def build_field_issues():
         if col in d.columns:
             d[col] = to_num(d[col])
 
-    # Add Year column so JS year-filter works
+    # Add Year column
+    def extract_year(month_str):
+        try:
+            if pd.isna(month_str) or month_str == '':
+                return '2026'
+            parts = str(month_str).split('-')
+            if len(parts) >= 2:
+                year_2digit = parts[-1]
+                year_4digit = '20' + year_2digit if len(year_2digit) == 2 else year_2digit
+                return year_4digit
+            return '2026'
+        except:
+            return '2026'
+    
     if "Year" not in d.columns:
-        MONTH_YEAR = {
-            'January': '2026', 'February': '2026', 'March': '2026', 'April': '2026',
-            'May': '2026', 'June': '2026', 'July': '2026', 'August': '2026',
-            'September': '2026', 'October': '2026', 'November': '2026', 'December': '2026',
-        }
-        d["Year"] = d["Month"].map(MONTH_YEAR).fillna('2026')
+        d["Year"] = d["Month"].apply(extract_year)
 
     cols = ["Month", "Year", "Identified", "Solved", "Cum Identified", "Cum Solved"]
     cols = [c for c in cols if c in d.columns]
@@ -220,21 +241,36 @@ def build_punch_points():
         return {}
 
     d = df_punch.copy()
-    item_col   = d.columns[0]
-    month_cols = [c for c in d.columns[1:] if str(c).strip() != ""]
+
+    if d.shape[1] < 2:
+        print(f"⚠️  Punch Points sheet has only {d.shape[1]} column(s) — need Month column + at least 1 item column. Skipping.")
+        return {"punch_by_month": []}
+
+    month_col = d.columns[0]
+    item_cols = [c for c in d.columns[1:] if str(c).strip() != "" and not str(c).lower().startswith("unnamed")]
+
+    if not item_cols:
+        print(f"⚠️  No valid item columns found in Punch Points sheet.")
+        return {"punch_by_month": []}
 
     d_long = d.melt(
-        id_vars=[item_col],
-        value_vars=month_cols,
-        var_name="Month",
+        id_vars=[month_col],
+        value_vars=item_cols,
+        var_name="Item",
         value_name="Item Count",
-    ).rename(columns={item_col: "Item"})
+    ).rename(columns={month_col: "Month"})
+
+    if "Month" not in d_long.columns:
+        return {"punch_by_month": []}
 
     d_long = d_long.dropna(subset=["Item Count"])
     d_long["Item Count"] = to_num(d_long["Item Count"])
     d_long = d_long.dropna(subset=["Item Count"])
     d_long = d_long[d_long["Item Count"] != 0]
     d_long["Punch Points"] = d_long["Item Count"]
+
+    if d_long.empty:
+        return {"punch_by_month": []}
 
     return {
         "punch_by_month": safe_records(
@@ -253,9 +289,12 @@ def build_tools():
     df = df_tools.copy()
     df["In Mill"]     = to_num(df["In Mill"])
     df["No of Tools"] = to_num(df["No of Tools"])
-    total_cost  = round(float(df["In Mill"].sum()), 1)
+
     df = df.dropna(subset=["No of Tools"])
-    df = df.iloc[:-1]  
+    if "Plant" in df.columns:
+        df = df[df["Plant"].notna() & (df["Plant"].astype(str).str.strip() != "")]
+
+    total_cost  = round(float(df["In Mill"].sum()), 1)
     total_tools = int(df["No of Tools"].sum())
 
     plant_grp = df.groupby("Plant", as_index=False).agg(
@@ -263,14 +302,14 @@ def build_tools():
         tools=("No of Tools", "sum"),
     )
     plant_grp["cost"] = plant_grp["cost"].round(1)
-    plant_grp["pct"]  = (plant_grp["cost"] / total_cost * 100).round(1)
+    plant_grp["pct"]  = (plant_grp["cost"] / total_cost * 100).round(1) if total_cost else 0
 
     shop_grp = df.groupby(["Plant", "Shop"], as_index=False).agg(
         cost=("In Mill", "sum"),
         tools=("No of Tools", "sum"),
     )
     shop_grp["cost"] = shop_grp["cost"].round(1)
-    shop_grp["pct"]  = (shop_grp["cost"] / total_cost * 100).round(1)
+    shop_grp["pct"]  = (shop_grp["cost"] / total_cost * 100).round(1) if total_cost else 0
     shop_grp["name"] = shop_grp["Plant"] + " - " + shop_grp["Shop"]
 
     rev_grp = df.groupby("Budget Type", as_index=False).agg(
@@ -278,22 +317,40 @@ def build_tools():
         tools=("No of Tools", "sum"),
     )
     rev_grp["cost"] = rev_grp["cost"].round(1)
-    rev_grp["pct"]  = (rev_grp["cost"] / total_cost * 100).round(1)
+    rev_grp["pct"]  = (rev_grp["cost"] / total_cost * 100).round(1) if total_cost else 0
 
-    # Build raw entries for table preview
-    raw_entries = safe_records(df)
+    entries_df = df.copy()
+    if "Handover Date" in entries_df.columns:
+        entries_df["Handover Date"] = pd.to_datetime(
+            entries_df["Handover Date"], errors="coerce"
+        ).dt.strftime("%d-%m-%Y")
+        entries_df["Handover Date"] = entries_df["Handover Date"].where(
+            entries_df["Handover Date"].notna(), ""
+        )
+
+    entries_cols = [
+        c for c in [
+            "Project", "Plant", "Shop", "Budget Type", "Month",
+            "Handover Date", "Design PIC", "Installation PIC",
+            "In Mill", "No of Tools", "Status",
+        ]
+        if c in entries_df.columns
+    ]
+    raw_entries = json.loads(
+        entries_df[entries_cols].to_json(orient="records", default_handler=str)
+    )
 
     return {
         "total_cost_million": total_cost,
         "total_tools": total_tools,
         "plant_distribution": plant_grp.to_dict(orient="records"),
         "plant_shop_distribution": shop_grp.to_dict(orient="records"),
-        "budget_distribution" : rev_grp.to_dict(orient = "records"),
+        "budget_distribution": rev_grp.to_dict(orient="records"),
         "raw_entries": raw_entries,
     }
 
 # ─────────────────────────────────────────────────────────────────────
-# 8. ENQUIRY CONVERSION RATIO (FIXED)
+# 8. ENQUIRY CONVERSION RATIO
 # ─────────────────────────────────────────────────────────────────────
 
 def build_ecr():
@@ -301,83 +358,21 @@ def build_ecr():
         return {}
 
     d = df_ecr.copy()
+    for col in ["Total Queries", "Queries Accepted", "Conversion Ratio"]:
+        if col in d.columns:
+            d[col] = to_num(d[col])
 
-    # Get actual column names
-    cols = list(d.columns)
-    if len(cols) < 3:
-        return {}
-
-    # Map by position: col 0 = Month, col 1 = Total Queries, col 2 = Queries Accepted
-    col_map = {
-        'Month': cols[0],
-        'Total Queries': cols[1],
-        'Queries Accepted': cols[2],
-    }
-    if len(cols) >= 4:
-        col_map['Conversion Ratio'] = cols[3]
-    if len(cols) >= 5:
-        col_map['Average Conversion Ratio'] = cols[4]
-
-    # Rename columns to standard names
-    rename_map = {v: k for k, v in col_map.items()}
-    d = d.rename(columns=rename_map)
-
-    # Drop rows with missing Month
-    d = d.dropna(subset=['Month'])
-
-    # Convert numeric columns
-    d['Total Queries'] = pd.to_numeric(d['Total Queries'], errors='coerce').fillna(0).astype(int)
-    d['Queries Accepted'] = pd.to_numeric(d['Queries Accepted'], errors='coerce').fillna(0).astype(int)
-
-    if 'Conversion Ratio' in d.columns:
-        d['Conversion Ratio'] = pd.to_numeric(d['Conversion Ratio'], errors='coerce').fillna(0).round(1)
-    if 'Average Conversion Ratio' in d.columns:
-        d['Average Conversion Ratio'] = pd.to_numeric(d['Average Conversion Ratio'], errors='coerce').fillna(0).round(1)
-
-    # Build output columns
-    output_cols = ['Month', 'Total Queries', 'Queries Accepted']
-    if 'Conversion Ratio' in d.columns:
-        output_cols.append('Conversion Ratio')
-    if 'Average Conversion Ratio' in d.columns:
-        output_cols.append('Average Conversion Ratio')
-
-    # Get average conversion from first row if available
-    avg_conversion = 0.0
-    if 'Average Conversion Ratio' in d.columns and len(d) > 0:
-        val = d['Average Conversion Ratio'].iloc[0]
-        if pd.notna(val):
-            avg_conversion = round(float(val), 1)
-
-    # Convert to plain Python objects for JSON - FIX: format dates as strings
-    by_month = []
-    for _, row in d[output_cols].iterrows():
-        record = {}
-        for col in output_cols:
-            val = row[col]
-            if col == 'Month':
-                # Format month as string - handle both datetime and string
-                if pd.isna(val):
-                    record[col] = ''
-                elif hasattr(val, 'strftime'):
-                    # It's a datetime - format it
-                    record[col] = val.strftime('%b-%y')
-                else:
-                    record[col] = str(val).strip()
-            elif pd.isna(val):
-                record[col] = 0
-            elif isinstance(val, (np.integer, np.int64)):
-                record[col] = int(val)
-            elif isinstance(val, (np.floating, np.float64)):
-                record[col] = float(val)
-            else:
-                record[col] = val
-        by_month.append(record)
+    total_queries = int(d["Total Queries"].dropna().sum()) if "Total Queries" in d.columns else 0
+    total_accepted = int(d["Queries Accepted"].dropna().sum()) if "Queries Accepted" in d.columns else 0
+    avg_conversion = (
+        round((total_accepted / total_queries) * 100, 1) if total_queries > 0 else 0
+    )
 
     return {
-        "by_month": by_month,
+        "by_month": safe_records(d[["Month", "Total Queries", "Queries Accepted", "Conversion Ratio"]]),
+        "total_queries": total_queries,
+        "total_accepted": total_accepted,
         "avg_conversion": avg_conversion,
-        "total_queries": int(d['Total Queries'].sum()),
-        "total_accepted": int(d['Queries Accepted'].sum()),
     }
 
 # ─────────────────────────────────────────────────────────────────────
@@ -491,27 +486,36 @@ global_kpis = {
     "safety_accidents": safety_accidents,
 }
 
+
 # ─────────────────────────────────────────────────────────────────────
-# BUILD RESULT
+# BUILD ALL SECTIONS
 # ─────────────────────────────────────────────────────────────────────
 
-result = {
-    "meta": {
-        "generated_at": datetime.now().isoformat(),
-        "source": "Manufacturing Analytics",
-    },
+print("\n" + "="*80)
+print("📊 GENERATING ANALYTICS JSON")
+print("="*80 + "\n")
+
+output = {
     "global_kpis":       global_kpis,
-    "query_analytics":   build_query_analytics(),
-    "safety":            build_safety(),
-    "revenue":           build_revenue(),
-    "field_issues":      build_field_issues(),
-    "cost_competency":   build_cost_competency(),
-    "punch_points":      build_punch_points(),
-    "tools":             build_tools(),
-    "kesh_komi":         build_kesh_komi(),
-    "ecr":               build_ecr(),
+    "query_analytics": build_query_analytics(),
+    "safety": build_safety(),
+    "revenue": build_revenue(),
+    "field_issues": build_field_issues(),
+    "cost_competency": build_cost_competency(),
+    "punch_points": build_punch_points(),
+    "tools": build_tools(),
+    "kesh_komi": build_kesh_komi(),
+    "ecr": build_ecr(),
 }
 
-OUTPUT_JSON.write_text(json.dumps(result, indent=2, default=str), encoding="utf-8")
-print(f"\n✅ Analytics data written to: {OUTPUT_JSON}")
-print(f"   Generated at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+# ─────────────────────────────────────────────────────────────────────
+# SAVE
+# ─────────────────────────────────────────────────────────────────────
+
+with open(OUTPUT_JSON, 'w') as f:
+    json.dump(output, f, indent=2, default=str)
+
+print(f"\n✅ Generated: {OUTPUT_JSON}")
+print(f"\n" + "="*80)
+print("✨ Analytics JSON ready for dashboard!")
+print("="*80 + "\n")

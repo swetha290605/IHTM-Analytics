@@ -163,7 +163,6 @@ body {
             padding: 20px;
             border-radius: 12px;
             box-shadow: var(--shadow);
-            border-left: 4px solid var(--primary);
         }
 
         .stat-value {
@@ -443,7 +442,7 @@ select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3p
 .stat-box .sl { font-size: 10px; color: var(--text-secondary); margin-top: 3px; font-weight: 500; line-height: 1.3; }
 .stat-box.orange { border: 1px solid #f59e0b; background: rgba(245,158,11,.08); }
 .status-high { background: rgba(245,158,11,.15); color: #b45309; border: 1px solid rgba(245,158,11,.35); }
-.stat-box.green { background: rgba(0, 122, 61, 0.08); border-color: var(--success-light); }
+.stat-box.green { background: rgba(13, 199, 106, 0.08); border-color: var(--success-light); }
 .stat-box.green .sv { color: var(--success); }
 .stat-box.blue { background: rgba(100, 150, 255, 0.08); border-color: #8fa3ff; }
 .stat-box.blue .sv { color: #3366ff; }
@@ -683,7 +682,7 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
 
 
 <div id="loading"><div class="spinner"></div><p>Loading analytics data…</p></div>
-<div id="reload-banner">🔄 Data updated — refreshing…</div>
+<div id="reload-banner">Data updated — refreshing…</div>
 
 <div class="app-shell">
 
@@ -714,6 +713,7 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
     <button class="nav-item tab-btn" data-panel="maintenance"><i class="ti ti-car-garage"></i><span>Car Maintenance</span></button>
     <button class="nav-item tab-btn" data-panel="ros"><i class="ti ti-rotate"></i><span>IHTM ROS</span></button>
     <button class="nav-item tab-btn" data-panel="gps"><i class="ti ti-satellite"></i><span>GPS Requirements</span></button>
+    <button class="nav-item tab-btn" data-panel=""><i class="ti ti-time"></i><span>Set Reminders</span></button>
   </div>
 
   <div class="sidenav-bottom">
@@ -965,7 +965,7 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
 
     <div style="display:flex;gap:10px;">
       <button onclick="saveMilestone()" style="flex:1;background:linear-gradient(135deg,#EB0A1E,#ff3344);color:#fff;border:none;border-radius:20px;padding:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;">
-        💾 Save Milestone
+        Save Milestone
       </button>
       <button onclick="closeMilestoneModal()" style="background:var(--bg);color:var(--text-secondary);border:1.5px solid var(--border);border-radius:20px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">
         Cancel
@@ -1067,21 +1067,21 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
         <div class="rich-metric-tile rm-red">
           <div class="rm-glow"></div>
           <div class="rm-icon"><i class="ti ti-trending-up"></i></div>
-          <div class="rm-value" id="d-rev-total">₹ 0</div>
+          <div class="rm-value" id="d-rev-total"></div>
           <div class="rm-label">TOTAL REVENUE</div>
           <div class="rm-sub">FY Actuals</div>
         </div>
         <div class="rich-metric-tile rm-blue">
           <div class="rm-glow"></div>
           <div class="rm-icon"><i class="ti ti-target"></i></div>
-          <div class="rm-value" id="d-rev-target">₹ 0</div>
+          <div class="rm-value" id="d-rev-target"></div>
           <div class="rm-label">YEARLY TARGET</div>
           <div class="rm-sub">Annual Goal</div>
         </div>
         <div class="rich-metric-tile rm-green rm-full">
           <div class="rm-glow"></div>
           <div class="rm-icon"><i class="ti ti-chart-pie"></i></div>
-          <div class="rm-value" id="d-rev-pct">0%</div>
+          <div class="rm-value" id="d-rev-pct"></div>
           <div class="rm-label">TARGET ACHIEVEMENT</div>
           <div class="rm-sub">Needed per 3 months: <span id="d-rev-per3m">₹ 0 M</span></div>
         </div>
@@ -1509,7 +1509,7 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
   <div class="stat-row" id="keshkomi-stats-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px;">
     <div class="stat-box" style="background:rgba(220,38,38,0.12);border:1px solid #dc2626;">
       <div class="sv" id="keshkomi-stat-high" style="color:#dc2626;">0</div>
-      <div class="sl">🔴 High Priority</div>
+      <div class="sl">High Priority</div>
     </div>
     <div class="stat-box" style="background:rgba(127,29,29,0.12);border:1px solid #7f1d1d;">
       <div class="sv" id="keshkomi-stat-incomplete" style="color:#991b1b;">0</div>
@@ -1550,7 +1550,7 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
           <option value="all">All Entries</option>
           <option value="month">Sort by Month</option>
           <option value="week">Sort by Week</option>
-          <option value="high">🔴 High Priority Only</option>
+          <option value="high">High Priority Only</option>
           <option value="completed">Completed Only</option>
           <option value="incomplete">Incomplete Only</option>
           <option value="partial">Partially Completed Only</option>
@@ -1647,26 +1647,26 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
 <div class="container">
         <!-- Header -->
         <div style="margin-bottom:20px;">
-            <div style="font-size:20px;font-weight:800;color:var(--primary);">🛰️ GPS Request Management System</div>
+            <div style="font-size:20px;font-weight:800;color:var(--primary);">GPS Request Management System</div>
             <div style="font-size:13px;color:var(--text-secondary);margin-top:4px;">Submit, track, and manage GPS equipment requests efficiently</div>
         </div>
 
             <!-- Statistics -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value" id="total-requests">0</div>
+                    <div class="stat-value" id="total-requests"></div>
                     <div class="stat-label">Total Requests</div>
                 </div>
                 <div class="stat-card" style="border-left-color: var(--warning);">
-                    <div class="stat-value" id="pending-count" style="color: var(--warning);">0</div>
+                    <div class="stat-value" id="pending-count" style="color: var(--warning);"></div>
                     <div class="stat-label">Pending Approval</div>
                 </div>
                 <div class="stat-card" style="border-left-color: var(--success);">
-                    <div class="stat-value" id="approved-count" style="color: var(--success);">0</div>
+                    <div class="stat-value" id="approved-count" style="color: var(--success);"></div>
                     <div class="stat-label">Approved</div>
                 </div>
                 <div class="stat-card" style="border-left-color: var(--text-tertiary);">
-                    <div class="stat-value" id="latest-date" style="color: var(--text-tertiary); font-size: 16px;">N/A</div>
+                    <div class="stat-value" id="latest-date" style="color: var(--text-tertiary); font-size: 16px;"></div>
                     <div class="stat-label">Latest Request</div>
                 </div>
             </div>
@@ -1675,7 +1675,7 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
             <div class="main-grid">
                 <!-- GPS Request Form -->
                 <div class="card">
-                    <div class="card-title">📝 Submit New GPS Request</div>
+                    <div class="card-title">Submit New GPS Request</div>
                     <div id="gps-form-success" style="display:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:600;margin-bottom:12px;"></div>
                     <div class="form-group">
                         <label for="request-date">Request Date</label>
@@ -1712,30 +1712,13 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
                     <button type="button" onclick="submitGPSRequest()" class="btn-submit">✓ Submit GPS Request</button>
                 </div>
 
-                <!-- Quick Stats & Instructions -->
-                <div class="card">
-                    <div class="card-title">📋 How to Use</div>
-                    <div style="color: var(--text-secondary); line-height: 1.6; font-size: 13px;">
-                        <p><strong>Step 1:</strong> Fill in the equipment details in the form on the left.</p>
-                        <p style="margin-top: 12px;"><strong>Step 2:</strong> Enter your name and location information.</p>
-                        <p style="margin-top: 12px;"><strong>Step 3:</strong> Click "Submit GPS Request" to add it to the system.</p>
-                        <p style="margin-top: 12px;"><strong>Step 4:</strong> Track the status in the requests table below.</p>
-                        <hr style="margin: 16px 0; border: none; border-top: 1px solid var(--border);">
-                        <p><strong>Status Flow:</strong> Pending → Approved</p>
-                        <p style="margin-top:8px;"><strong>Fields:</strong></p>
-                        <ul style="margin-left: 16px; margin-top:4px;">
-                            <li>Equipment ID: Unique identifier</li>
-                            <li>Location: Where GPS will be deployed</li>
-                            <li>Approved By: Set when manager approves</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+
 
             <!-- GPS Requests Table -->
+            <div class="card">
             <div class="table-container">
                 <div class="table-header">
-                    <div class="table-header-title">📍 GPS Requests Log</div>
+                    <div class="table-header-title">GPS Requests Log</div>
                 </div>
                 <div class="table-responsive">
                     <table id="requests-table">
@@ -1764,6 +1747,7 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
                         </tbody>
                     </table>
                 </div>
+            </div>
             </div>
 </div>
 </div>
@@ -2148,14 +2132,9 @@ function renderRevenue() {
   });
 
   // Calculate totals for the filtered period
-  const totalRev = filteredData.reduce((sum, r) => sum + (r['Revenue (Million Rs)'] || 0), 0);
-  const totalTgt = filteredData.reduce((sum, r) => sum + (r['Target (Million Rs)'] || 0), 0);
-  const targetPct = totalTgt > 0 ? Math.round((totalRev / totalTgt) * 100 * 10) / 10 : 0;
-
-  document.getElementById('d-rev-total').textContent = '₹ ' + totalRev.toFixed(1) + ' M';
-  document.getElementById('d-rev-target').textContent = '₹ ' + totalTgt.toFixed(1) + ' M';
-  document.getElementById('d-rev-pct').textContent = targetPct + '%';
-  document.getElementById('d-rev-per3m').textContent = '₹ ' + (d.needed_per_3months || 0) + ' M';
+  document.getElementById('d-rev-total').textContent = (d.total_revenue|| 0).toLocaleString();
+  document.getElementById('d-rev-target').textContent = (d.yearly_target|| 0).toLocaleString();
+  document.getElementById('d-rev-pct').textContent = (d.target_achievement_pct || 0) + '%';
 }
 
 // ═════════════════════════════════════════════════════════════════════
@@ -2189,14 +2168,14 @@ function renderIssues() {
     data: {
       labels: issueData.map(r => r.Month),
       datasets: [
+        { type: 'line', label: 'Cumulative Identified', data: cumIdentArr, borderColor: '#FB0A1H', backgroundColor: 'transparent',
+          borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#FB0A1H', tension: 0.4, yAxisID: 'y1' },
+        { type: 'line', label: 'Cumulative Solved', data: cumSolvedArr, borderColor: '#007a3a', backgroundColor: 'transparent',
+          borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#007a3a', tension: 0.4, yAxisID: 'y1' },
         { type: 'bar', label: 'Identified', data: issueData.map(r => r.Identified || 0),
           backgroundColor: colors.primary + 'bb', borderColor: colors.primary, borderWidth: 1, borderRadius: 5, yAxisID: 'y' },
         { type: 'bar', label: 'Solved', data: issueData.map(r => r.Solved || 0),
-          backgroundColor: colors.success + 'bb', borderColor: colors.success, borderWidth: 1, borderRadius: 5, yAxisID: 'y' },
-        { type: 'line', label: 'Cumulative Identified', data: cumIdentArr, borderColor: '#EB0A1E', backgroundColor: 'transparent',
-          borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#EB0A1E', tension: 0.4, yAxisID: 'y1' },
-        { type: 'line', label: 'Cumulative Solved', data: cumSolvedArr, borderColor: '#007a3d', backgroundColor: 'transparent',
-          borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#007a3d', tension: 0.4, yAxisID: 'y1' }
+          backgroundColor: colors.success + 'bb', borderColor: colors.success, borderWidth: 1, borderRadius: 5, yAxisID: 'y' }
       ]
     },
     options: {
@@ -2358,7 +2337,7 @@ function renderECR() {
 
   document.getElementById('d-ecr-total').textContent = (d.total_queries || 0).toLocaleString();
   document.getElementById('d-ecr-accepted').textContent = (d.total_accepted || 0).toLocaleString();
-  document.getElementById('d-ecr-avg').textContent = (d.avg_conversion || 0) + '%';
+  document.getElementById('d-ecr-avg').textContent = (d.average_conversion || 0) + '%';
 
   const byMonth = d.by_month || [];
 
@@ -2437,7 +2416,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
       b.classList.toggle('active', b.dataset.panel === btn.dataset.panel);
     });
     // Load data for specific tabs
-    if (btn.dataset.panel === 'query') { loadQueryTable(); renderGanttChart(); }
+    if (btn.dataset.panel === 'schedule') { loadQueryTable(); renderGanttChart(); }
     if (btn.dataset.panel === 'keshkomi') { loadKeshKomiTable(); }
     if (btn.dataset.panel === 'maintenance') { renderMaintTable(); }
     if (btn.dataset.panel === 'cars') { loadCarTable(); }
@@ -2525,15 +2504,15 @@ async function saveQueryEntry() {
     });
     const data = await res.json();
     if (data.success) {
-      showQueryMsg('✅ Project saved successfully!', 'success');
+      showQueryMsg('Project saved successfully!', 'success');
       clearQueryForm();
       loadQueryTable();
       renderGanttChart();
     } else {
-      showQueryMsg('❌ Error: ' + data.error, 'error');
+      showQueryMsg('Error: ' + data.error, 'error');
     }
   } catch(e) {
-    showQueryMsg('❌ Failed to connect to server', 'error');
+    showQueryMsg('Failed to connect to server', 'error');
   }
 }
 
@@ -3005,7 +2984,7 @@ function updateKeshKomiChart() {
   keshKomiChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['🔴 High Priority', 'Incomplete', 'Partially Done', 'Completed'],
+      labels: ['High Priority', 'Incomplete', 'Partially Done', 'Completed'],
       datasets: [{
         label: 'Count', data: [hp, incomplete, partial, completed],
         backgroundColor: ['rgba(220,38,38,0.82)', 'rgba(127,29,29,0.82)', 'rgba(133,79,11,0.8)', 'rgba(0,122,61,0.8)'],
@@ -3051,7 +3030,7 @@ async function saveCarEntry() {
     });
     const data = await res.json();
     if (data.success) {
-      showCarMsg('✅ Saved successfully!', 'success');
+      showCarMsg(' Saved successfully!', 'success');
       clearCarForm();
       loadCarTable();
     } else { showCarMsg('❌ Error: ' + data.error, 'error'); }
@@ -3119,7 +3098,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 });
 
 // ═════════════════════════════════════════════════════════════════════
-// CAR MAINTENANCE (FIXED: 4 weeks, latest week above, save to Excel)
+// CAR MAINTENANCE (FIXED: 5 weeks, latest week above, save to Excel)
 // ═════════════════════════════════════════════════════════════════════
 let maintEntries = JSON.parse(localStorage.getItem('maintEntries') || '[]');
 
@@ -3159,7 +3138,7 @@ async function loadMaintFromServer() {
   // Build all weeks then reverse for latest first
   const allWeeks = [];
   months.forEach(m => {
-    for (let w = 1; w <= 4; w++) {
+    for (let w = 1; w <= 5; w++) {
       allWeeks.push(`${m} W${w}`);
     }
   });
@@ -3172,13 +3151,13 @@ async function loadMaintFromServer() {
 
 function maintIsAllowed(dateStr) {
   if (!dateStr) return true;
-  const day = new Date(dateStr + 'T00:00:00').getDay();
+  const day = new Date(dateStr).getDay();
   return day === 4 || day === 5;
 }
 
 function maintDayLabel(dateStr) {
   if (!dateStr) return '';
-  const day = new Date(dateStr + 'T00:00:00').getDay();
+  const day = new Date(dateStr).getDay();
   if (day === 4) return 'Thursday ✓';
   if (day === 5) return 'Friday ✓';
   return 'Not Thu/Fri ✗';
@@ -3194,7 +3173,7 @@ function maintValidateDate(input, hintId) {
 
 function maintWeekLabel(dateStr) {
   if (!dateStr) return '—';
-  const d = new Date(dateStr + 'T00:00:00');
+  const d = new Date(dateStr);
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   return months[d.getMonth()] + ' W' + Math.min(Math.ceil(d.getDate() / 7), 4);
 }
@@ -3246,7 +3225,7 @@ async function saveMaintEntry() {
   try {
     await fetch('/api/add-maintenance-entry', {
       method: 'POST', headers: authHeaders(),
-      body: JSON.stringify({ name: entry.name, cleanDate: entry.cleanDate, cleanAck: entry.cleanAck, confDate: entry.confDate, confAck: entry.confAck, week: entry.week })
+      body: JSON.stringify({ week: entry.week,cleanDate: entry.cleanDate, name: entry.name, cleanAck: entry.cleanAck, confDate: entry.confDate, confAck: entry.confAck,  })
     });
   } catch(e) {}
 }
@@ -3335,7 +3314,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   if (btn.dataset.panel === 'maintenance') btn.addEventListener('click', renderMaintTable);
 });
 
-renderMaintTable();
+renderGPSTable();
 
         // Submit GPS Request
         async function submitGPSRequest() {

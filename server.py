@@ -98,7 +98,7 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             lwd_date = data.get('lwd_date', '')
             type_of_month = data.get('type_of_month', '')
 
-            print(f"📝 Safety update received: month={month}, status={status}, days={days}")
+            print(f" Safety update received: month={month}, status={status}, days={days}")
 
             wb = load_workbook('data/Safety_Status.xlsx')
             ws = wb.active
@@ -119,7 +119,7 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                     break
 
             wb.save('data/Safety_Status.xlsx')
-            print(f"💾 Safety Excel saved successfully")
+            print(f"Safety Excel saved successfully")
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -190,7 +190,7 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             ws.cell(next_row, 8).value = data.get('tm_no')
 
             wb.save('data/Car_Usage.xlsx')
-            print(f"✅ Car entry saved: {data.get('name')} on {data.get('date')}")
+            print(f"Car entry saved: {data.get('name')} on {data.get('date')}")
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -256,6 +256,104 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                         'project':   row[5],
                         'name':      row[6],
                         'tm_no':     row[7],
+                    })
+
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'entries': entries}).encode())
+
+        except Exception as e:
+            print(f"❌ Error reading car entries: {e}")
+            self.send_response(500)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'entries': [], 'error': str(e)}).encode())
+
+ # ── CAR MAINTENANCE — ADD ─────────────────────────────────────────────
+    def handle_add_car_maint(self):
+        try:
+            content_length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(content_length)
+            data = json.loads(body)
+
+            wb = load_workbook('data/Car_Maintenance_Schedule.xlsx')
+            ws = wb.active
+
+            next_row = ws.max_row + 1
+            ws.cell(next_row, 2).value = data.get('week')
+            ws.cell(next_row, 3).value = data.get('cleaning_date')
+            ws.cell(next_row, 4).value = data.get('name')
+            ws.cell(next_row, 5).value = data.get('cleaning_ack')
+            ws.cell(next_row, 6).value = data.get('confirmation_date')
+            ws.cell(next_row, 7).value = data.get('confirmation_ack')
+        
+
+            wb.save('data/Car_Maintenance_Schedule.xlsx')
+            print(f"Car entry saved: {data.get('week')} on {data.get('cleaning_date')}")
+
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'success': True}).encode())
+
+        except Exception as e:
+            print(f"❌ Error saving car entry: {e}")
+            self.send_response(500)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
+
+    # ── CAR USAGE — UPDATE ACTUAL RETURN TIME ────────────────────────
+    def handle_update_car_maint_actual(self):
+        try:
+            content_length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(content_length)
+            data = json.loads(body)
+            week        = data.get('week')
+            confirmation_date = data.get('confirmation_date')
+
+            print("Conf Date Updated")
+
+            wb = load_workbook('data/Car_Maintenance.xlsx')
+            ws = wb.active
+
+            for row in ws.iter_rows(min_row=2):
+                if str(row[0].value) == week:
+                    row[4].value = confirmation_date
+                    print(f"✅ Match found for week, updating actual return time...")
+                    break
+
+            wb.save('data/Car_Maintenance.xlsx')
+            print(f"💾 Confirmation updated")
+
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'success': True}).encode())
+
+        except Exception as e:
+            print(f"❌ Error updating conf date: {e}")
+            self.send_response(500)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
+
+    # ── CAR USAGE — GET ─────────────────────────────────────────────
+    def handle_get_car_maint_entries(self):
+        try:
+            wb = load_workbook('data/Car_Maintenance.xlsx')
+            ws = wb.active
+            entries = []
+            for row in ws.iter_rows(min_row=2, values_only=True):
+                if any(cell is not None for cell in row):
+                    entries.append({
+                        'week':     row[0],
+                        'cleading date':      str(row[1]) if row[1] else '',
+                        'name':  str(row[2]) if row[2] else '',
+                        'cleaning_ack': str(row[3]) if row[3] else '',
+                        'confirmation_date':    str(row[4]) if row[4] else '',
+                        'confirmation_ack':   row[5],
                     })
 
             self.send_response(200)
@@ -690,6 +788,113 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
             self.wfile.write(json.dumps({'entries': [], 'error': str(e)}).encode())
+
+
+            # ── GPS — ADD ──────────────────────────────────────────────
+    def handle_add_gps_entry(self):
+        try:
+            content_length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(content_length)
+            data = json.loads(body)
+
+            wb = load_workbook('data/GPS_Request.xlsx')
+            ws = wb.active
+
+            next_row = ws.max_row + 1
+
+            ws.cell(next_row, 1).value = int(data.get('sl_no')) if data.get('sl_no') else next_row - 1
+            ws.cell(next_row, 2).value = data.get('request_date')
+            ws.cell(next_row, 3).value = data.get('equipment_id')
+            ws.cell(next_row, 4).value = data.get('equipment_name')
+            ws.cell(next_row, 5).value = data.get('quantity')
+            ws.cell(next_row, 6).value = data.get('Requested By')
+            ws.cell(next_row, 7).value = data.get('location/Site')
+            ws.cell(next_row, 7).value = data.get('remarks')
+
+            wb.save('data/GPS_Request.xlsx')
+            print(f"GPS Request entry saved")
+
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'success': True}).encode())
+
+        except Exception as e:
+            print(f"❌ Error saving GPS entry")
+            self.send_response(500)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
+
+    # ── GPS — GET ──────────────────────────────────────────────
+    def handle_get_gps_entries(self):
+        try:
+            wb = load_workbook('data/GPS_Request.xlsx')
+            ws = wb.active
+            entries = []
+            for row in ws.iter_rows(min_row=2, values_only=True):
+                if any(cell is not None for cell in row):
+                    entries.append({
+                        'sl_no':          row[0],
+                        'requested date':    row[1] or '',
+                        'action_plan':    row[2] or '',
+                        'responsibility': row[3] or '',
+                        'target_date':    str(row[4]) if row[4] else '',
+                        'status':         row[5] or 'Incomplete',
+                        'high_priority':  bool(row[6]) if len(row) > 6 and row[6] is not None else False,
+                    })
+
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'entries': entries}).encode())
+
+        except Exception as e:
+            print(f"❌ Error reading KeshKomi entries: {e}")
+            self.send_response(500)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'entries': [], 'error': str(e)}).encode())
+
+    # ── KESHKOMI — UPDATE STATUS ────────────────────────────────────
+    def handle_update_keshkomi_status(self):
+        try:
+            content_length = int(self.headers.get('Content-Length', 0))
+            body = self.rfile.read(content_length)
+            data = json.loads(body)
+
+            sl_no = data.get('sl_no')
+            new_status = data.get('status')
+            high_priority = data.get('high_priority', None)
+
+            wb = load_workbook('data/KeshKomi.xlsx')
+            ws = wb.active
+
+            for row in ws.iter_rows(min_row=2):
+                if row[0].value and str(row[0].value) == str(sl_no):
+                    row[5].value = new_status
+                    if high_priority is not None:
+                        if len(row) > 6:
+                            row[6].value = bool(high_priority)
+                        else:
+                            ws.cell(row[0].row, 7).value = bool(high_priority)
+                    break
+
+            wb.save('data/KeshKomi.xlsx')
+            print(f"✅ KeshKomi status updated: Sl No {sl_no} → {new_status}")
+
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'success': True}).encode())
+
+        except Exception as e:
+            print(f"❌ Error updating KeshKomi status: {e}")
+            self.send_response(500)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
+
 
     def log_message(self, format, *args):
         print(f'[{self.log_date_time_string()}] {format % args}')

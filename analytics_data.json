@@ -1,6 +1,6 @@
 {
   "global_kpis": {
-    "timestamp": "2026-06-30T10:24:30.199243",
+    "timestamp": "2026-06-30T16:01:53.166239",
     "total_queries": 30,
     "total_tools": 1571,
     "safety_accidents": 20
@@ -154,61 +154,73 @@
       {
         "Month": "2026-04-01 00:00:00",
         "Revenue (Million Rs)": 5.0,
+        "Cumulative Revenue": 5.0,
         "Target (Million Rs)": 50.0
       },
       {
         "Month": "2026-05-01 00:00:00",
         "Revenue (Million Rs)": 7.99,
+        "Cumulative Revenue": 12.99,
         "Target (Million Rs)": null
       },
       {
         "Month": "2026-06-01 00:00:00",
         "Revenue (Million Rs)": 8.9,
+        "Cumulative Revenue": 21.89,
         "Target (Million Rs)": null
       },
       {
         "Month": "2026-07-01 00:00:00",
         "Revenue (Million Rs)": 6.77,
+        "Cumulative Revenue": 28.66,
         "Target (Million Rs)": null
       },
       {
         "Month": "2026-08-01 00:00:00",
         "Revenue (Million Rs)": 7.99,
+        "Cumulative Revenue": 36.65,
         "Target (Million Rs)": null
       },
       {
         "Month": "2026-09-01 00:00:00",
         "Revenue (Million Rs)": 9.08,
+        "Cumulative Revenue": 45.73,
         "Target (Million Rs)": null
       },
       {
         "Month": "2026-10-01 00:00:00",
         "Revenue (Million Rs)": null,
+        "Cumulative Revenue": null,
         "Target (Million Rs)": null
       },
       {
         "Month": "2026-11-01 00:00:00",
         "Revenue (Million Rs)": null,
+        "Cumulative Revenue": null,
         "Target (Million Rs)": null
       },
       {
         "Month": "2026-12-01 00:00:00",
         "Revenue (Million Rs)": null,
+        "Cumulative Revenue": null,
         "Target (Million Rs)": null
       },
       {
         "Month": "2027-01-01 00:00:00",
         "Revenue (Million Rs)": null,
+        "Cumulative Revenue": null,
         "Target (Million Rs)": null
       },
       {
         "Month": "2027-02-01 00:00:00",
         "Revenue (Million Rs)": null,
+        "Cumulative Revenue": null,
         "Target (Million Rs)": null
       },
       {
         "Month": "2027-03-01 00:00:00",
         "Revenue (Million Rs)": null,
+        "Cumulative Revenue": null,
         "Target (Million Rs)": null
       }
     ]
@@ -1894,6 +1906,6 @@
     ],
     "total_queries": 1075,
     "total_accepted": 771,
-    "avg_conversion": 71.7
+    "average_conversion": 67.0
   }
 }

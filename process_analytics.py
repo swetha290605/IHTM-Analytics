@@ -115,6 +115,8 @@ def build_safety():
         except:
             return '2026'
     
+    
+    
     if "Year" not in d.columns:
         d["Year"] = d["Month"].apply(extract_year)
 
@@ -150,13 +152,13 @@ def build_revenue():
         return {}
 
     d = df_revenue.copy()
+    
     d["Revenue (Million Rs)"] = to_num(d["Revenue (Million Rs)"])
+    d["Cumulative Revenue"] = to_num(d["Cumulative Revenue"])
     d["Target (Million Rs)"]  = to_num(d["Target (Million Rs)"])
     total_revenue = d["Revenue (Million Rs)"].dropna().sum()
-
     target_values = d["Target (Million Rs)"].dropna()
     total_target = float(target_values.iloc[0]) if not target_values.empty else 0
-
     target_pct = round(total_revenue / total_target * 100, 1) if total_target > 0 else 0
 
     months_left = 12 - len(d)
@@ -168,7 +170,7 @@ def build_revenue():
     else 0
     )
 
-    rev_by_month = safe_records(d[["Month", "Revenue (Million Rs)", "Target (Million Rs)"]].dropna(subset=["Month"]))
+    rev_by_month = safe_records(d[["Month", "Revenue (Million Rs)", "Cumulative Revenue", "Target (Million Rs)"]].dropna(subset=["Month"]))
 
     return {
         "total_revenue": round(float(total_revenue), 1),
@@ -243,7 +245,7 @@ def build_punch_points():
     d = df_punch.copy()
 
     if d.shape[1] < 2:
-        print(f"⚠️  Punch Points sheet has only {d.shape[1]} column(s) — need Month column + at least 1 item column. Skipping.")
+        print(f"Punch Points sheet has only {d.shape[1]} column(s) — need Month column + at least 1 item column. Skipping.")
         return {"punch_by_month": []}
 
     month_col = d.columns[0]
@@ -364,15 +366,13 @@ def build_ecr():
 
     total_queries = int(d["Total Queries"].dropna().sum()) if "Total Queries" in d.columns else 0
     total_accepted = int(d["Queries Accepted"].dropna().sum()) if "Queries Accepted" in d.columns else 0
-    avg_conversion = (
-        round((total_accepted / total_queries) * 100, 1) if total_queries > 0 else 0
-    )
+    average_conversion = round(d["Conversion Ratio"].mean(), 1)
 
     return {
         "by_month": safe_records(d[["Month", "Total Queries", "Queries Accepted", "Conversion Ratio"]]),
         "total_queries": total_queries,
         "total_accepted": total_accepted,
-        "avg_conversion": avg_conversion,
+        "average_conversion": average_conversion
     }
 
 # ─────────────────────────────────────────────────────────────────────

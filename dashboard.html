@@ -690,8 +690,8 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
   <div class="sidenav-logo">
     <div class="sidenav-logo-icon"><i class="ti ti-building-factory-2"></i></div>
     <div class="sidenav-logo-text">
-      <div class="sidenav-logo-title">TKM Operations</div>
-      <div class="sidenav-logo-sub">Manufacturing Portal</div>
+      <div class="sidenav-logo-title">IHTM Operations</div>
+      <div class="sidenav-logo-sub">Planning Portal</div>
     </div>
   </div>
 
@@ -728,7 +728,7 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
     <button class="hamburger-btn" id="hamburgerBtn" title="Toggle menu">
       <i class="ti ti-menu-2"></i>
     </button>
-    <span class="topbar-title">TKM Dashboard</span>
+    <span class="topbar-title">IHTM Dashboard</span>
     <div class="topbar-search">
       <i class="ti ti-search"></i>
       <input type="text" placeholder="    Search operational data…" />
@@ -744,7 +744,7 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
       <div class="topbar-profile">
         <div class="topbar-avatar">A</div>
         <div class="topbar-profile-info">
-          <div class="topbar-profile-name">Loading…</div>
+          <div class="topbar-profile-name">Swetha</div>
           <div class="topbar-profile-role">—</div>
         </div>
       </div>
@@ -2955,11 +2955,11 @@ async function updateKeshKomiStatus(slNo, newStatus, isHP) {
       applyKeshKomiSort();
       updateKeshKomiStats();
       updateKeshKomiChart();
-      showKeshKomiAlert('✅ Status updated!', 'success');
+      showKeshKomiAlert(' Status updated!', 'success');
     } else {
-      showKeshKomiAlert('❌ Error: ' + data.error, 'error');
+      showKeshKomiAlert('Error: ' + data.error, 'error');
     }
-  } catch(e) { showKeshKomiAlert('❌ Failed to update status', 'error'); }
+  } catch(e) { showKeshKomiAlert('Failed to update status', 'error'); }
 }
 
 function updateKeshKomiStats() {
@@ -3033,8 +3033,8 @@ async function saveCarEntry() {
       showCarMsg(' Saved successfully!', 'success');
       clearCarForm();
       loadCarTable();
-    } else { showCarMsg('❌ Error: ' + data.error, 'error'); }
-  } catch(e) { showCarMsg('❌ Failed to connect to server', 'error'); }
+    } else { showCarMsg('Error: ' + data.error, 'error'); }
+  } catch(e) { showCarMsg('Failed to connect to server', 'error'); }
 }
 
 function clearCarForm() {
@@ -3088,9 +3088,9 @@ async function saveActualReturn(rowIdx, slNo) {
     const data = await res.json();
     if (data.success) {
       document.getElementById(`actual-cell-${rowIdx}`).textContent = time;
-      showCarMsg('✅ Actual return time saved!', 'success');
-    } else { showCarMsg('❌ Error: ' + data.error, 'error'); }
-  } catch(e) { showCarMsg('❌ Failed to connect to server', 'error'); }
+      showCarMsg('Actual return time saved!', 'success');
+    } else { showCarMsg('Error: ' + data.error, 'error'); }
+  } catch(e) { showCarMsg('Failed to connect to server', 'error'); }
 }
 
 document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -3219,7 +3219,7 @@ async function saveMaintEntry() {
   localStorage.setItem('maintEntries', JSON.stringify(maintEntries));
   renderMaintTable();
   clearMaintForm();
-  showMaintMsg('✅ Entry saved!', 'success');
+  showMaintMsg('Entry saved!', 'success');
 
   // Also save to server/Excel
   try {
@@ -3350,7 +3350,7 @@ renderGPSTable();
 
                 const data = await res.json();
                 if (data.success) {
-                    showGPSMsg('✅ GPS Request submitted successfully!', 'success');
+                    showGPSMsg('GPS Request submitted successfully!', 'success');
                     // Reset form
                     ['equipment-id','equipment-name','requested-by','location','remarks'].forEach(id => {
                         const el = document.getElementById(id); if (el) el.value = '';
@@ -3439,7 +3439,7 @@ renderGPSTable();
 
                 const data = await res.json();
                 if (data.success) {
-                    showGPSMsg('✅ Request approved!', 'success');
+                    showGPSMsg('Request approved!', 'success');
                     loadGPSRequests();
                 } else {
                     showGPSMsg(data.error || 'Failed to approve', 'error');

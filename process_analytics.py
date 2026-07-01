@@ -25,25 +25,57 @@ DATA_DIR.mkdir(exist_ok=True)
 # LOAD ALL EXCELS
 # ─────────────────────────────────────────────────────────────────────
 
-def load_excel(filename):
+import re
+import pandas as pd
+
+def normalize_month(val):
+    if pd.isna(val):
+        return val
+
+    val_str = str(val)
+
+    # Case 1: Already in short format like "Jun-25"
+    if re.match(r"^[A-Za-z]{3}-\d{2}$", val_str):
+        return val_str
+
+    # Case 2: Full month name (January, February, etc.)
+    full_months = [
+        "January","February","March","April","May","June",
+        "July","August","September","October","November","December"
+    ]
+    if val_str in full_months:
+        return val_str
+
+    # Case 3: Datetime values → convert to short format
+    try:
+        return pd.to_datetime(val_str).strftime("%b-%y")
+    except:
+        return val_str
+
+def load_excel(filename, **kwargs):
     path = DATA_DIR / filename
     if path.exists():
-        df = pd.read_excel(path, dtype=str)
+        df = pd.read_excel(path, **kwargs)
+        if "Month" in df.columns:
+            df["Month"] = df["Month"].apply(normalize_month)
         print(f"✅ Loaded: {filename}")
         return df
     else:
         print(f"⚠️  Missing: {filename}")
         return None
 
+
+    
 df_query   = load_excel("Query_Analytics.xlsx")
-df_safety  = load_excel("Safety_Status.xlsx")
-df_revenue = load_excel("IHTM_Revenue.xlsx")
-df_issues  = load_excel("Field_Issues.xlsx")
+df_safety  = load_excel("Safety_Status.xlsx", dtype={"Month": str})
+df_revenue = load_excel("IHTM_Revenue.xlsx", dtype={"Month": str})
+df_issues  = load_excel("Field_Issues.xlsx", dtype={"Month": str})
 df_cost    = load_excel("Cost_Competency.xlsx")
-df_punch   = load_excel("Project_Punch_Points.xlsx")
-df_tools   = load_excel("Tools_Under_Progress.xlsx")
-df_keshkomi = load_excel("KeshKomi.xlsx")
-df_ecr      = load_excel("Enquiry_Conversion_Ratio.xlsx")
+df_punch   = load_excel("Project_Punch_Points.xlsx", dtype={"Month": str})
+df_tools   = load_excel("Tools_Under_Progress.xlsx", dtype={"Month": str})
+df_keshkomi = load_excel("KeshKomi.xlsx", dtype={"Month": str})
+df_ecr      = load_excel("Enquiry_Conversion_Ratio.xlsx", dtype={"Month": str})
+
 
 # ─────────────────────────────────────────────────────────────────────
 # HELPER FUNCTIONS
@@ -115,7 +147,7 @@ def build_safety():
         except:
             return '2026'
     
-    
+
     
     if "Year" not in d.columns:
         d["Year"] = d["Month"].apply(extract_year)

@@ -1,6 +1,6 @@
 {
   "global_kpis": {
-    "timestamp": "2026-06-30T17:12:58.872774",
+    "timestamp": "2026-07-01T20:19:05.864840",
     "total_queries": 30,
     "total_tools": 1571,
     "safety_accidents": 20
@@ -65,80 +65,80 @@
   "safety": {
     "month_accidents": [
       {
-        "Month": "2026-04-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Apr-26",
+        "Year": "2026",
         "No of Accidents": 4.0
       },
       {
-        "Month": "2026-05-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "May-26",
+        "Year": "2026",
         "No of Accidents": 0.0
       },
       {
-        "Month": "2026-06-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Jun-26",
+        "Year": "2026",
         "No of Accidents": 1.0
       },
       {
-        "Month": "2026-07-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Jul-26",
+        "Year": "2026",
         "No of Accidents": 8.0
       },
       {
-        "Month": "2026-08-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Aug-26",
+        "Year": "2026",
         "No of Accidents": 0.0
       },
       {
-        "Month": "2026-09-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Sep-26",
+        "Year": "2026",
         "No of Accidents": 6.0
       },
       {
-        "Month": "2026-10-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Oct-26",
+        "Year": "2026",
         "No of Accidents": 1.0
       }
     ],
     "safety_calendar": [
       {
-        "month": "2026-04-01 00:00:00",
+        "month": "Apr-26",
         "accidents": 4,
         "status": "red",
         "label": "LWD (4)"
       },
       {
-        "month": "2026-05-01 00:00:00",
+        "month": "May-26",
         "accidents": 0,
         "status": "green",
         "label": "No Accident"
       },
       {
-        "month": "2026-06-01 00:00:00",
+        "month": "Jun-26",
         "accidents": 1,
         "status": "blue",
         "label": "NLWD"
       },
       {
-        "month": "2026-07-01 00:00:00",
+        "month": "Jul-26",
         "accidents": 8,
         "status": "red",
         "label": "LWD (8)"
       },
       {
-        "month": "2026-08-01 00:00:00",
+        "month": "Aug-26",
         "accidents": 0,
         "status": "green",
         "label": "No Accident"
       },
       {
-        "month": "2026-09-01 00:00:00",
+        "month": "Sep-26",
         "accidents": 6,
         "status": "red",
         "label": "LWD (6)"
       },
       {
-        "month": "2026-10-01 00:00:00",
+        "month": "Oct-26",
         "accidents": 1,
         "status": "blue",
         "label": "NLWD"
@@ -152,73 +152,73 @@
     "needed_per_3months": 0,
     "revenue_by_month": [
       {
-        "Month": "2026-04-01 00:00:00",
+        "Month": "Apr-26",
         "Revenue (Million Rs)": 5.0,
         "Cumulative Revenue": 5.0,
         "Target (Million Rs)": 50.0
       },
       {
-        "Month": "2026-05-01 00:00:00",
+        "Month": "May-26",
         "Revenue (Million Rs)": 7.99,
         "Cumulative Revenue": 12.99,
         "Target (Million Rs)": null
       },
       {
-        "Month": "2026-06-01 00:00:00",
+        "Month": "Jun-26",
         "Revenue (Million Rs)": 8.9,
         "Cumulative Revenue": 21.89,
         "Target (Million Rs)": null
       },
       {
-        "Month": "2026-07-01 00:00:00",
+        "Month": "Jul-26",
         "Revenue (Million Rs)": 6.77,
         "Cumulative Revenue": 28.66,
         "Target (Million Rs)": null
       },
       {
-        "Month": "2026-08-01 00:00:00",
+        "Month": "Aug-26",
         "Revenue (Million Rs)": 7.99,
         "Cumulative Revenue": 36.65,
         "Target (Million Rs)": null
       },
       {
-        "Month": "2026-09-01 00:00:00",
+        "Month": "Sep-26",
         "Revenue (Million Rs)": 9.08,
         "Cumulative Revenue": 45.73,
         "Target (Million Rs)": null
       },
       {
-        "Month": "2026-10-01 00:00:00",
+        "Month": "Oct-26",
         "Revenue (Million Rs)": null,
         "Cumulative Revenue": null,
         "Target (Million Rs)": null
       },
       {
-        "Month": "2026-11-01 00:00:00",
+        "Month": "Nov-26",
         "Revenue (Million Rs)": null,
         "Cumulative Revenue": null,
         "Target (Million Rs)": null
       },
       {
-        "Month": "2026-12-01 00:00:00",
+        "Month": "Dec-26",
         "Revenue (Million Rs)": null,
         "Cumulative Revenue": null,
         "Target (Million Rs)": null
       },
       {
-        "Month": "2027-01-01 00:00:00",
+        "Month": "Jan-27",
         "Revenue (Million Rs)": null,
         "Cumulative Revenue": null,
         "Target (Million Rs)": null
       },
       {
-        "Month": "2027-02-01 00:00:00",
+        "Month": "Feb-27",
         "Revenue (Million Rs)": null,
         "Cumulative Revenue": null,
         "Target (Million Rs)": null
       },
       {
-        "Month": "2027-03-01 00:00:00",
+        "Month": "Mar-27",
         "Revenue (Million Rs)": null,
         "Cumulative Revenue": null,
         "Target (Million Rs)": null
@@ -228,96 +228,96 @@
   "field_issues": {
     "issues_by_month": [
       {
-        "Month": "2026-04-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Apr-26",
+        "Year": "2026",
         "Identified": 12,
         "Solved": 8,
         "Cum Identified": 12,
         "Cum Solved": 8
       },
       {
-        "Month": "2026-05-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "May-26",
+        "Year": "2026",
         "Identified": 15,
         "Solved": 12,
         "Cum Identified": 27,
         "Cum Solved": 20
       },
       {
-        "Month": "2026-06-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Jun-26",
+        "Year": "2026",
         "Identified": 18,
         "Solved": 14,
         "Cum Identified": 45,
         "Cum Solved": 34
       },
       {
-        "Month": "2026-07-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Jul-26",
+        "Year": "2026",
         "Identified": 10,
         "Solved": 10,
         "Cum Identified": 55,
         "Cum Solved": 44
       },
       {
-        "Month": "2026-08-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Aug-26",
+        "Year": "2026",
         "Identified": 14,
         "Solved": 13,
         "Cum Identified": 69,
         "Cum Solved": 57
       },
       {
-        "Month": "2026-09-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Sep-26",
+        "Year": "2026",
         "Identified": 16,
         "Solved": 15,
         "Cum Identified": 85,
         "Cum Solved": 72
       },
       {
-        "Month": "2026-10-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Oct-26",
+        "Year": "2026",
         "Identified": 12,
         "Solved": 12,
         "Cum Identified": 97,
         "Cum Solved": 84
       },
       {
-        "Month": "2026-11-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Nov-26",
+        "Year": "2026",
         "Identified": 18,
         "Solved": 17,
         "Cum Identified": 115,
         "Cum Solved": 101
       },
       {
-        "Month": "2026-12-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Dec-26",
+        "Year": "2026",
         "Identified": 20,
         "Solved": 18,
         "Cum Identified": 135,
         "Cum Solved": 119
       },
       {
-        "Month": "2027-01-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Jan-27",
+        "Year": "2027",
         "Identified": 17,
         "Solved": 16,
         "Cum Identified": 152,
         "Cum Solved": 135
       },
       {
-        "Month": "2027-02-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Feb-27",
+        "Year": "2027",
         "Identified": 15,
         "Solved": 14,
         "Cum Identified": 167,
         "Cum Solved": 149
       },
       {
-        "Month": "2027-03-01 00:00:00",
-        "Year": "01 00:00:00",
+        "Month": "Mar-27",
+        "Year": "2027",
         "Identified": 13,
         "Solved": 12,
         "Cum Identified": 180,
@@ -416,106 +416,106 @@
   "punch_points": {
     "punch_by_month": [
       {
-        "Month": "2026-04-01 00:00:00",
+        "Month": "Apr-26",
         "Item": "Wrap Guard QC",
-        "Item Count": 12,
-        "Punch Points": 12
+        "Item Count": 12.0,
+        "Punch Points": 12.0
       },
       {
-        "Month": "2026-06-01 00:00:00",
+        "Month": "Jun-26",
         "Item": "Wrap Guard QC",
-        "Item Count": 45,
-        "Punch Points": 45
+        "Item Count": 45.0,
+        "Punch Points": 45.0
       },
       {
-        "Month": "2026-07-01 00:00:00",
+        "Month": "Jul-26",
         "Item": "Wrap Guard QC",
-        "Item Count": 55,
-        "Punch Points": 55
+        "Item Count": 55.0,
+        "Punch Points": 55.0
       },
       {
-        "Month": "2026-09-01 00:00:00",
+        "Month": "Sep-26",
         "Item": "Wrap Guard QC",
-        "Item Count": 79,
-        "Punch Points": 79
+        "Item Count": 79.0,
+        "Punch Points": 79.0
       },
       {
-        "Month": "2026-04-01 00:00:00",
+        "Month": "Apr-26",
         "Item": "688D",
-        "Item Count": 14,
-        "Punch Points": 14
+        "Item Count": 14.0,
+        "Punch Points": 14.0
       },
       {
-        "Month": "2026-05-01 00:00:00",
+        "Month": "May-26",
         "Item": "688D",
-        "Item Count": 6,
-        "Punch Points": 6
+        "Item Count": 6.0,
+        "Punch Points": 6.0
       },
       {
-        "Month": "2026-04-01 00:00:00",
+        "Month": "Apr-26",
         "Item": "Zone Jigs",
-        "Item Count": 77,
-        "Punch Points": 77
+        "Item Count": 77.0,
+        "Punch Points": 77.0
       },
       {
-        "Month": "2026-07-01 00:00:00",
+        "Month": "Jul-26",
         "Item": "Zone Jigs",
-        "Item Count": 30,
-        "Punch Points": 30
+        "Item Count": 30.0,
+        "Punch Points": 30.0
       },
       {
-        "Month": "2026-09-01 00:00:00",
+        "Month": "Sep-26",
         "Item": "Zone Jigs",
-        "Item Count": 98,
-        "Punch Points": 98
+        "Item Count": 98.0,
+        "Punch Points": 98.0
       },
       {
-        "Month": "2026-04-01 00:00:00",
+        "Month": "Apr-26",
         "Item": "GBL",
-        "Item Count": 9,
-        "Punch Points": 9
+        "Item Count": 9.0,
+        "Punch Points": 9.0
       },
       {
-        "Month": "2026-05-01 00:00:00",
+        "Month": "May-26",
         "Item": "GBL",
-        "Item Count": 7,
-        "Punch Points": 7
+        "Item Count": 7.0,
+        "Punch Points": 7.0
       },
       {
-        "Month": "2026-07-01 00:00:00",
+        "Month": "Jul-26",
         "Item": "GBL",
-        "Item Count": 20,
-        "Punch Points": 20
+        "Item Count": 20.0,
+        "Punch Points": 20.0
       },
       {
-        "Month": "2026-09-01 00:00:00",
+        "Month": "Sep-26",
         "Item": "GBL",
-        "Item Count": 33,
-        "Punch Points": 33
+        "Item Count": 33.0,
+        "Punch Points": 33.0
       },
       {
-        "Month": "2026-06-01 00:00:00",
+        "Month": "Jun-26",
         "Item": "SBC",
-        "Item Count": 45,
-        "Punch Points": 45
+        "Item Count": 45.0,
+        "Punch Points": 45.0
       },
       {
-        "Month": "2026-04-01 00:00:00",
+        "Month": "Apr-26",
         "Item": "XYZ",
-        "Item Count": 9,
-        "Punch Points": 9
+        "Item Count": 9.0,
+        "Punch Points": 9.0
       },
       {
-        "Month": "2026-05-01 00:00:00",
+        "Month": "May-26",
         "Item": "XYZ",
-        "Item Count": 2,
-        "Punch Points": 2
+        "Item Count": 2.0,
+        "Punch Points": 2.0
       },
       {
-        "Month": "2026-06-01 00:00:00",
+        "Month": "Jun-26",
         "Item": "XYZ",
-        "Item Count": 8,
-        "Punch Points": 8
+        "Item Count": 8.0,
+        "Punch Points": 8.0
       }
     ]
   },
@@ -1410,511 +1410,492 @@
   "kesh_komi": {
     "entries": [
       {
-        "sl_no": "1",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "XYZ",
-        "target_date": "2026-06-26",
-        "status": "Incomplete",
-        "high_priority_flag": "Yes",
-        "high_priority": false,
-        "month": "Jun 2026"
-      },
-      {
-        "sl_no": "2",
-        "kadai_point": "Assembly Delay",
-        "action_plan": "Work On Requirements",
-        "responsibility": "JJHG",
-        "target_date": "2026-06-27",
-        "status": "Incomplete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Jun 2026"
-      },
-      {
-        "sl_no": "2",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-06-28",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Jun 2026"
-      },
-      {
-        "sl_no": "2",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-06-28",
-        "status": "Complete",
-        "high_priority_flag": "Yes",
-        "high_priority": false,
-        "month": "Jun 2026"
-      },
-      {
-        "sl_no": "3",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-06-29",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Jun 2026"
-      },
-      {
-        "sl_no": "4",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-06-30",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Jun 2026"
-      },
-      {
-        "sl_no": "5",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-07-01",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Jul 2026"
-      },
-      {
-        "sl_no": "6",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-07-02",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Jul 2026"
-      },
-      {
-        "sl_no": "7",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-07-03",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Jul 2026"
-      },
-      {
-        "sl_no": "8",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-07-04",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Jul 2026"
-      },
-      {
-        "sl_no": "9",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-07-05",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Jul 2026"
-      },
-      {
-        "sl_no": "10",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-07-06",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Jul 2026"
-      },
-      {
-        "sl_no": "11",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-07-07",
-        "status": "Complete",
-        "high_priority_flag": "Yes",
-        "high_priority": false,
-        "month": "Jul 2026"
-      },
-      {
-        "sl_no": "12",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-08-08",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2026"
-      },
-      {
-        "sl_no": "13",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-08-09",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2026"
-      },
-      {
-        "sl_no": "14",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-08-10",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2026"
-      },
-      {
-        "sl_no": "15",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2026-08-11",
-        "status": "Incomplete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2026"
-      },
-      {
-        "sl_no": "16",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2027-08-12",
-        "status": "Incomplete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "17",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2027-08-13",
-        "status": "Incomplete",
-        "high_priority_flag": "Yes",
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "18",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2027-08-14",
-        "status": "Incomplete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "19",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2027-08-15",
-        "status": "Incomplete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "20",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2027-08-16",
-        "status": "Incomplete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "21",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2027-08-17",
-        "status": "Incomplete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "22",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2027-08-18",
-        "status": "Incomplete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "23",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "KJH",
-        "target_date": "2027-08-19",
-        "status": "Incomplete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "24",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "XYZ",
-        "target_date": "2027-08-20",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "25",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "XYZ",
-        "target_date": "2027-08-21",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "26",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "XYZ",
-        "target_date": "2027-08-22",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "27",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "XYZ",
-        "target_date": "2027-08-23",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "28",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "XYZ",
-        "target_date": "2027-08-24",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "29",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "XYZ",
-        "target_date": "2027-08-25",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "30",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "XYZ",
-        "target_date": "2027-08-26",
-        "status": "Complete",
-        "high_priority_flag": null,
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "31",
-        "kadai_point": "Production Delay",
-        "action_plan": "Increase Resourse",
-        "responsibility": "XYZ",
-        "target_date": "2027-08-27",
-        "status": "Complete",
-        "high_priority_flag": "Yes",
-        "high_priority": false,
-        "month": "Aug 2027"
-      },
-      {
-        "sl_no": "2",
-        "kadai_point": "hjhdv",
-        "action_plan": "bndhvd",
-        "responsibility": "hbvdhvd",
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
         "target_date": null,
-        "status": "Completed",
-        "high_priority_flag": "True",
+        "status": null,
+        "high_priority_flag": null,
         "high_priority": false,
         "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": null,
+        "kadai_point": null,
+        "action_plan": null,
+        "responsibility": null,
+        "target_date": null,
+        "status": null,
+        "high_priority_flag": null,
+        "high_priority": false,
+        "month": null
+      },
+      {
+        "sl_no": 1.0,
+        "kadai_point": "Production",
+        "action_plan": "Increase Resoureces",
+        "responsibility": "Swetha",
+        "target_date": "2026-07-01",
+        "status": "Incomplete",
+        "high_priority_flag": 1.0,
+        "high_priority": false,
+        "month": "Jul 2026"
+      },
+      {
+        "sl_no": 2.0,
+        "kadai_point": "Production Assy",
+        "action_plan": "Increase Resourse",
+        "responsibility": "John",
+        "target_date": "2026-07-02",
+        "status": "Partially Completed",
+        "high_priority_flag": 1.0,
+        "high_priority": false,
+        "month": "Jul 2026"
       }
     ],
     "status_distribution": [
       {
-        "status": "Complete",
-        "count": 22,
-        "pct": 64.7
-      },
-      {
         "status": "Incomplete",
-        "count": 11,
-        "pct": 32.4
+        "count": 1,
+        "pct": 50.0
       },
       {
-        "status": "Completed",
+        "status": "Partially Completed",
         "count": 1,
-        "pct": 2.9
+        "pct": 50.0
       }
     ],
     "monthly_breakdown": [
       {
-        "month": "Aug 2026",
-        "status": "Complete",
-        "count": 3
-      },
-      {
-        "month": "Aug 2026",
+        "month": "Jul 2026",
         "status": "Incomplete",
         "count": 1
       },
       {
-        "month": "Aug 2027",
-        "status": "Complete",
-        "count": 8
-      },
-      {
-        "month": "Aug 2027",
-        "status": "Incomplete",
-        "count": 8
-      },
-      {
         "month": "Jul 2026",
-        "status": "Complete",
-        "count": 7
-      },
-      {
-        "month": "Jun 2026",
-        "status": "Complete",
-        "count": 4
-      },
-      {
-        "month": "Jun 2026",
-        "status": "Incomplete",
-        "count": 2
+        "status": "Partially Completed",
+        "count": 1
       }
     ],
     "monthly_hp_breakdown": [],
-    "total_entries": 34,
+    "total_entries": 35,
     "high_priority": 0,
-    "completed": 1,
-    "partial": 0,
-    "incomplete": 11
+    "completed": 0,
+    "partial": 1,
+    "incomplete": 1
   },
   "ecr": {
     "by_month": [
       {
-        "Month": "2026-04-01 00:00:00",
+        "Month": "Apr-26",
         "Total Queries": 70,
         "Queries Accepted": 50,
         "Conversion Ratio": 71.4
       },
       {
-        "Month": "2026-05-01 00:00:00",
+        "Month": "May-26",
         "Total Queries": 56,
         "Queries Accepted": 20,
         "Conversion Ratio": 35.7
       },
       {
-        "Month": "2026-06-01 00:00:00",
+        "Month": "Jun-26",
         "Total Queries": 78,
         "Queries Accepted": 60,
         "Conversion Ratio": 76.9
       },
       {
-        "Month": "2026-07-01 00:00:00",
+        "Month": "Jul-26",
         "Total Queries": 68,
         "Queries Accepted": 60,
         "Conversion Ratio": 88.2
       },
       {
-        "Month": "2026-08-01 00:00:00",
+        "Month": "Aug-26",
         "Total Queries": 77,
         "Queries Accepted": 56,
         "Conversion Ratio": 72.7
       },
       {
-        "Month": "2026-09-01 00:00:00",
+        "Month": "Sep-26",
         "Total Queries": 90,
         "Queries Accepted": 22,
         "Conversion Ratio": 24.4
       },
       {
-        "Month": "2026-10-01 00:00:00",
+        "Month": "Oct-26",
         "Total Queries": 334,
         "Queries Accepted": 300,
         "Conversion Ratio": 89.8
       },
       {
-        "Month": "2026-11-01 00:00:00",
+        "Month": "Nov-26",
         "Total Queries": 56,
         "Queries Accepted": 45,
         "Conversion Ratio": 80.4
       },
       {
-        "Month": "2026-12-01 00:00:00",
+        "Month": "Dec-26",
         "Total Queries": 12,
         "Queries Accepted": 10,
         "Conversion Ratio": 83.3
       },
       {
-        "Month": "2027-01-01 00:00:00",
+        "Month": "Jan-27",
         "Total Queries": 67,
         "Queries Accepted": 23,
         "Conversion Ratio": 34.3
       },
       {
-        "Month": "2027-02-01 00:00:00",
+        "Month": "Feb-27",
         "Total Queries": 77,
         "Queries Accepted": 45,
         "Conversion Ratio": 58.4
       },
       {
-        "Month": "2027-03-01 00:00:00",
+        "Month": "Mar-27",
         "Total Queries": 90,
         "Queries Accepted": 80,
         "Conversion Ratio": 88.9

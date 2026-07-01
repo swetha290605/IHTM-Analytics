@@ -13,6 +13,8 @@ sys.stdout.reconfigure(encoding='utf-8')
 from pathlib import Path
 import json
 from openpyxl import load_workbook
+from datetime import datetime, date
+
 import hashlib
 import secrets
 import time
@@ -21,6 +23,7 @@ PORT = 8000
 subprocess.run(["python", "process_analytics.py"], check=False)
 
 class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
+    
 
     def end_headers(self):
         self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
@@ -46,6 +49,8 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.handle_get_keshkomi_entries()
         elif self.path.startswith('/api/get-punch-entries'):
             self.handle_get_punch_entries()
+        elif self.path.startswith('/api/get-gps-requests'):
+            self.handle_get_gps_entries()
         else:
             super().do_GET()
 
@@ -80,6 +85,10 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.handle_add_keshkomi_entry()
         elif self.path == '/api/update-keshkomi-status':
             self.handle_update_keshkomi_status()
+        elif self.path == '/api/add-gps-request':
+            self.handle_add_gps_entry()
+        elif self.path == '/api/approve-gps-request':
+            self.handle_approve_gps_request()
         else:
             self.send_response(404)
             self.end_headers()
@@ -188,9 +197,10 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             ws.cell(next_row, 6).value = data.get('project')
             ws.cell(next_row, 7).value = data.get('name')
             ws.cell(next_row, 8).value = data.get('tm_no')
-
+           
             wb.save('data/Car_Usage.xlsx')
             print(f"Car entry saved: {data.get('name')} on {data.get('date')}")
+            wb2 = load_workbook('data/Car_Usage.xlsx')
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -249,111 +259,13 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 if any(cell is not None for cell in row):
                     entries.append({
                         'sl_no':     row[0],
-                        'date':      str(row[1]) if row[1] else '',
+                        'date':      row[1].strftime("%d-%m-%Y") if isinstance(row[1], (datetime, date)) else str(row[1]) if row[1] else '',
                         'out_time':  str(row[2]) if row[2] else '',
                         'tentative': str(row[3]) if row[3] else '',
                         'actual':    str(row[4]) if row[4] else '',
                         'project':   row[5],
                         'name':      row[6],
                         'tm_no':     row[7],
-                    })
-
-            self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({'entries': entries}).encode())
-
-        except Exception as e:
-            print(f"❌ Error reading car entries: {e}")
-            self.send_response(500)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({'entries': [], 'error': str(e)}).encode())
-
- # ── CAR MAINTENANCE — ADD ─────────────────────────────────────────────
-    def handle_add_car_maint(self):
-        try:
-            content_length = int(self.headers.get('Content-Length', 0))
-            body = self.rfile.read(content_length)
-            data = json.loads(body)
-
-            wb = load_workbook('data/Car_Maintenance_Schedule.xlsx')
-            ws = wb.active
-
-            next_row = ws.max_row + 1
-            ws.cell(next_row, 2).value = data.get('week')
-            ws.cell(next_row, 3).value = data.get('cleaning_date')
-            ws.cell(next_row, 4).value = data.get('name')
-            ws.cell(next_row, 5).value = data.get('cleaning_ack')
-            ws.cell(next_row, 6).value = data.get('confirmation_date')
-            ws.cell(next_row, 7).value = data.get('confirmation_ack')
-        
-
-            wb.save('data/Car_Maintenance_Schedule.xlsx')
-            print(f"Car entry saved: {data.get('week')} on {data.get('cleaning_date')}")
-
-            self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({'success': True}).encode())
-
-        except Exception as e:
-            print(f"❌ Error saving car entry: {e}")
-            self.send_response(500)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
-
-    # ── CAR USAGE — UPDATE ACTUAL RETURN TIME ────────────────────────
-    def handle_update_car_maint_actual(self):
-        try:
-            content_length = int(self.headers.get('Content-Length', 0))
-            body = self.rfile.read(content_length)
-            data = json.loads(body)
-            week        = data.get('week')
-            confirmation_date = data.get('confirmation_date')
-
-            print("Conf Date Updated")
-
-            wb = load_workbook('data/Car_Maintenance.xlsx')
-            ws = wb.active
-
-            for row in ws.iter_rows(min_row=2):
-                if str(row[0].value) == week:
-                    row[4].value = confirmation_date
-                    print(f"✅ Match found for week, updating actual return time...")
-                    break
-
-            wb.save('data/Car_Maintenance.xlsx')
-            print(f"💾 Confirmation updated")
-
-            self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({'success': True}).encode())
-
-        except Exception as e:
-            print(f"❌ Error updating conf date: {e}")
-            self.send_response(500)
-            self.send_header('Content-Type', 'application/json')
-            self.end_headers()
-            self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
-
-    # ── CAR USAGE — GET ─────────────────────────────────────────────
-    def handle_get_car_maint_entries(self):
-        try:
-            wb = load_workbook('data/Car_Maintenance.xlsx')
-            ws = wb.active
-            entries = []
-            for row in ws.iter_rows(min_row=2, values_only=True):
-                if any(cell is not None for cell in row):
-                    entries.append({
-                        'week':     row[0],
-                        'cleading date':      str(row[1]) if row[1] else '',
-                        'name':  str(row[2]) if row[2] else '',
-                        'cleaning_ack': str(row[3]) if row[3] else '',
-                        'confirmation_date':    str(row[4]) if row[4] else '',
-                        'confirmation_ack':   row[5],
                     })
 
             self.send_response(200)
@@ -386,14 +298,22 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             ws.cell(next_row, 4).value = data.get('leader')
             ws.cell(next_row, 5).value = data.get('tool_no')
             ws.cell(next_row, 6).value = data.get('summary')
-            ws.cell(next_row, 7).value = data.get('date_query')
-            ws.cell(next_row, 8).value = data.get('date_spec')
-            ws.cell(next_row, 9).value = data.get('date_concept')
-            ws.cell(next_row, 10).value = data.get('date_estim')
-            ws.cell(next_row, 11).value = data.get('date_po')
+
+            # Frontend sends the newly-created project's starting stage as
+            # current_stage / current_stage_date (not date_query directly),
+            # so stamp that date into the matching milestone column.
+            stage_col = {'Query': 7, 'Speculation': 8, 'Concept': 9, 'Estimation': 10, 'PO/Budget': 11}
+            start_stage = data.get('current_stage', 'Query')
+            start_date  = data.get('current_stage_date', '')
+            col = stage_col.get(start_stage, 7)
+            ws.cell(next_row, col).value = start_date
+
+            ws.cell(next_row, 12).value = start_date   # current_stage_date
+            ws.cell(next_row, 13).value = start_stage  # current_stage
 
             wb.save('data/Query_Details.xlsx')
             print(f"✅ Query entry saved: {data.get('project_name')}")
+            
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -422,13 +342,13 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                         'leader':            row[3],
                         'tool_no':           row[4],
                         'summary':           row[5] or '',
-                        'current_status':    row[6] or '',
-                        'date_query':        str(row[7])  if row[7]  else '',
-                        'speculation_date':  str(row[8])  if row[8]  else '',
-                        'concept_date':      str(row[9])  if row[9]  else '',
-                        'estimation_date':   str(row[10]) if row[10] else '',
-                        'po_budget_date':    str(row[11]) if row[11] else '',
-                        'status_update_date': str(row[12]) if row[12] else '',
+                        'date_query':        str(row[6])  if row[6]  else '',
+                        'date_spec':         str(row[7])  if row[7]  else '',
+                        'date_concept':      str(row[8])  if row[8]  else '',
+                        'date_estim':        str(row[9])  if row[9]  else '',
+                        'date_po':           str(row[10]) if row[10] else '',
+                        'current_stage_date': str(row[11]) if row[11] else '',
+                        'current_stage':     row[12] if len(row) > 12 and row[12] else '',
                     })
 
             self.send_response(200)
@@ -454,13 +374,18 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             current_stage = data.get('current_stage')
             stage_date    = data.get('stage_date')
 
+            stage_col = {'Query': 7, 'Speculation': 8, 'Concept': 9, 'Estimation': 10, 'PO/Budget': 11}
+            col_idx = stage_col.get(current_stage)
+
             wb = load_workbook('data/Query_Details.xlsx')
             ws = wb.active
 
             for row in ws.iter_rows(min_row=2):
                 if row[0].value and str(row[0].value).strip() == str(project_name).strip():
-                    row[6].value  = current_stage
-                    row[12].value = stage_date
+                    if col_idx:
+                        row[col_idx - 1].value = stage_date   # date for the selected milestone
+                    row[11].value = stage_date                # current_stage_date
+                    row[12].value = current_stage              # current_stage
                     break
 
             wb.save('data/Query_Details.xlsx')
@@ -539,7 +464,7 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
             for row in ws.iter_rows(min_row=2):
                 if row[0].value and str(row[0].value).strip() == str(project_name).strip():
-                    row[col_idx].value = date
+                    row[col_idx - 1].value = date
                     break
 
             wb.save('data/Query_Details.xlsx')
@@ -558,24 +483,27 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
 
     # ── CAR MAINTENANCE — ADD ───────────────────────────────────────
+    # Columns: 1=week, 2=cleanDate, 3=name, 4=cleanAck, 5=confDate, 6=confAck
     def handle_add_maintenance_entry(self):
         try:
             content_length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(content_length)
             data = json.loads(body)
 
-            wb = load_workbook('data/Car_Maintainance_Schedule.xlsx')
+            wb = load_workbook('data/Car_Maintenance_Schedule.xlsx')
             ws = wb.active
 
             next_row = ws.max_row + 1
 
-            ws.cell(next_row, 1).value = data.get('date')
-            ws.cell(next_row, 2).value = data.get('type')
-            ws.cell(next_row, 3).value = data.get('cleaner_name')
-            ws.cell(next_row, 4).value = data.get('status')
+            ws.cell(next_row, 1).value = data.get('week')
+            ws.cell(next_row, 2).value = data.get('cleanDate')
+            ws.cell(next_row, 3).value = data.get('name')
+            ws.cell(next_row, 4).value = bool(data.get('cleanAck', False))
+            ws.cell(next_row, 5).value = data.get('confDate', '')
+            ws.cell(next_row, 6).value = bool(data.get('confAck', False))
 
-            wb.save('data/Car_Maintainance_Schedule.xlsx')
-            print(f"✅ Maintenance entry saved: {data.get('type')} on {data.get('date')}")
+            wb.save('data/Car_Maintenance_Schedule.xlsx')
+            print(f"✅ Maintenance entry saved: {data.get('name')} on {data.get('cleanDate')}")
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -589,41 +517,51 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
 
-    # ── CAR MAINTENANCE — UPDATE ────────────────────────────────────
+    # ── CAR MAINTENANCE — UPDATE (generic field/value patch by name) ─
     def handle_update_maintenance_entry(self):
         try:
             content_length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(content_length)
             data = json.loads(body)
 
-            wb = load_workbook('data/Car_Maintainance_Schedule.xlsx')
+            name  = data.get('name')
+            field = data.get('field')
+            value = data.get('value')
+
+            field_col = {
+            'week':      1,
+            'cleanDate': 2,
+            'name':      3,
+            'cleanAck':  4,
+            'confDate':  5,
+            'confAck':   6,
+        }
+            col_idx = field_col.get(field)
+            if col_idx is None:
+                raise ValueError(f"Unknown maintenance field: {field}")
+
+            if field in ('cleanAck', 'confAck'):
+                value = "Yes" if value else "No"
+
+            wb = load_workbook('data/Car_Maintenance_Schedule.xlsx')
             ws = wb.active
 
             found = False
-            for row in ws.iter_rows(min_row=2):
-                if row[0].value and str(row[0].value) == str(data.get('clean_date')):
-                    if row[2].value and str(row[2].value) == str(data.get('name')):
-                        row[3].value = data.get('conf_date', '')
-                        row[4].value = data.get('conf_ack', 'No')
-                        found = True
-                        break
+            for row in reversed(list(ws.iter_rows(min_row=2))):
+                if row[2].value and str(row[2].value).strip().lower() == str(name).strip().lower():
+                    row[col_idx - 1].value = value
+                    found = True
+                    break
 
-            if not found:
-                next_row = ws.max_row + 1
-                ws.cell(next_row, 1).value = data.get('clean_date')
-                ws.cell(next_row, 2).value = data.get('week')
-                ws.cell(next_row, 3).value = data.get('name')
-                ws.cell(next_row, 4).value = data.get('clean_ack')
-                ws.cell(next_row, 5).value = data.get('conf_date')
-                ws.cell(next_row, 6).value = data.get('conf_ack')
+            wb.save('data/Car_Maintenance_Schedule.xlsx')
+            wb.close()
 
-            wb.save('data/Car_Maintainance_Schedule.xlsx')
-            print(f"✅ Maintenance entry updated")
+            print(f"✅ Maintenance entry updated: {name} → {field}={value} (found={found})")
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
-            self.wfile.write(json.dumps({'success': True}).encode())
+            self.wfile.write(json.dumps({'success': found}).encode())
 
         except Exception as e:
             print(f"❌ Error updating maintenance entry: {e}")
@@ -631,20 +569,24 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
             self.wfile.write(json.dumps({'success': False, 'error': str(e)}).encode())
+                           
 
-    # ── CAR MAINTENANCE — GET ───────────────────────────────────────
+
+       # ── CAR MAINTENANCE — GET ───────────────────────────────────────
     def handle_get_maintenance_entries(self):
         try:
-            wb = load_workbook('data/Car_Maintainance_Schedule.xlsx')
+            wb = load_workbook('data/Car_Maintenance_Schedule.xlsx')
             ws = wb.active
             entries = []
             for row in ws.iter_rows(min_row=2, values_only=True):
                 if any(cell is not None for cell in row):
                     entries.append({
-                        'date': str(row[0]) if row[0] else '',
-                        'type': row[1] if len(row) > 1 else '',
-                        'cleaner_name': row[2] if len(row) > 2 else '',
-                        'status': row[3] if len(row) > 3 else '',
+                        'week':      row[0] or '',
+                        'cleanDate': str(row[1]) if row[1] else '',
+                        'name':      row[2] or '',
+                        'cleanAck':  bool(row[3]) if len(row) > 3 and row[3] is not None else False,
+                        'confDate':  str(row[4]) if len(row) > 4 and row[4] else '',
+                        'confAck':   bool(row[5]) if len(row) > 5 and row[5] is not None else False,
                     })
 
             self.send_response(200)
@@ -790,7 +732,10 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps({'entries': [], 'error': str(e)}).encode())
 
 
-            # ── GPS — ADD ──────────────────────────────────────────────
+    # ── GPS — ADD ──────────────────────────────────────────────
+    # Columns: 1=sl_no, 2=request_date, 3=equipment_id, 4=equipment_name,
+    #          5=quantity, 6=requested_by, 7=location, 8=remarks,
+    #          9=status, 10=approved_by, 11=requester_ack
     def handle_add_gps_entry(self):
         try:
             content_length = int(self.headers.get('Content-Length', 0))
@@ -801,18 +746,22 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             ws = wb.active
 
             next_row = ws.max_row + 1
+            sl_no = next_row - 1
 
-            ws.cell(next_row, 1).value = int(data.get('sl_no')) if data.get('sl_no') else next_row - 1
+            ws.cell(next_row, 1).value = sl_no
             ws.cell(next_row, 2).value = data.get('request_date')
-            ws.cell(next_row, 3).value = data.get('equipment_id')
-            ws.cell(next_row, 4).value = data.get('equipment_name')
+            ws.cell(next_row, 3).value = data.get('part_no')
+            ws.cell(next_row, 4).value = data.get('part_name')
             ws.cell(next_row, 5).value = data.get('quantity')
-            ws.cell(next_row, 6).value = data.get('Requested By')
-            ws.cell(next_row, 7).value = data.get('location/Site')
-            ws.cell(next_row, 7).value = data.get('remarks')
+            ws.cell(next_row, 6).value = data.get('requested_by')
+            ws.cell(next_row, 7).value = data.get('location')
+            ws.cell(next_row, 8).value = data.get('remarks')
+            ws.cell(next_row, 9).value = 'Pending'
+            ws.cell(next_row, 10).value = ''
+            ws.cell(next_row, 11).value = True
 
             wb.save('data/GPS_Request.xlsx')
-            print(f"GPS Request entry saved")
+            print(f"GPS Request entry saved: {data.get('part_name')}")
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -820,7 +769,7 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps({'success': True}).encode())
 
         except Exception as e:
-            print(f"❌ Error saving GPS entry")
+            print(f"❌ Error saving GPS entry: {e}")
             self.send_response(500)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
@@ -836,12 +785,15 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
                 if any(cell is not None for cell in row):
                     entries.append({
                         'sl_no':          row[0],
-                        'requested date':    row[1] or '',
-                        'action_plan':    row[2] or '',
-                        'responsibility': row[3] or '',
-                        'target_date':    str(row[4]) if row[4] else '',
-                        'status':         row[5] or 'Incomplete',
-                        'high_priority':  bool(row[6]) if len(row) > 6 and row[6] is not None else False,
+                        'request_date':   str(row[1]) if row[1] else '',
+                        'part_no':   row[2] or '',
+                        'part_name': row[3] or '',
+                        'quantity':       row[4] or 0,
+                        'requested_by':   row[5] or '',
+                        'location':       row[6] or '',
+                        'remarks':        row[7] or '',
+                        'approved_by':    row[9] if len(row) > 9 and row[9] else '',
+                        'requester_ack':  bool(row[10]) if len(row) > 10 and row[10] is not None else False,
                     })
 
             self.send_response(200)
@@ -850,38 +802,33 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps({'entries': entries}).encode())
 
         except Exception as e:
-            print(f"❌ Error reading KeshKomi entries: {e}")
+            print(f"❌ Error reading GPS entries: {e}")
             self.send_response(500)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()
             self.wfile.write(json.dumps({'entries': [], 'error': str(e)}).encode())
 
-    # ── KESHKOMI — UPDATE STATUS ────────────────────────────────────
-    def handle_update_keshkomi_status(self):
+    # ── GPS — APPROVE ────────────────────────────────────────────
+    def handle_approve_gps_request(self):
         try:
             content_length = int(self.headers.get('Content-Length', 0))
             body = self.rfile.read(content_length)
             data = json.loads(body)
 
             sl_no = data.get('sl_no')
-            new_status = data.get('status')
-            high_priority = data.get('high_priority', None)
+            approved_by = data.get('approved_by', '')
 
-            wb = load_workbook('data/KeshKomi.xlsx')
+            wb = load_workbook('data/GPS_Request.xlsx')
             ws = wb.active
 
             for row in ws.iter_rows(min_row=2):
                 if row[0].value and str(row[0].value) == str(sl_no):
-                    row[5].value = new_status
-                    if high_priority is not None:
-                        if len(row) > 6:
-                            row[6].value = bool(high_priority)
-                        else:
-                            ws.cell(row[0].row, 7).value = bool(high_priority)
+                    row[8].value = 'Approved'
+                    row[9].value = approved_by
                     break
 
-            wb.save('data/KeshKomi.xlsx')
-            print(f"✅ KeshKomi status updated: Sl No {sl_no} → {new_status}")
+            wb.save('data/GPS_Request.xlsx')
+            print(f"✅ GPS request approved: Sl No {sl_no} by {approved_by}")
 
             self.send_response(200)
             self.send_header('Content-Type', 'application/json')
@@ -889,7 +836,7 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
             self.wfile.write(json.dumps({'success': True}).encode())
 
         except Exception as e:
-            print(f"❌ Error updating KeshKomi status: {e}")
+            print(f"❌ Error approving GPS request: {e}")
             self.send_response(500)
             self.send_header('Content-Type', 'application/json')
             self.end_headers()

@@ -671,10 +671,105 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
 .maint-export-btn { background:var(--bg); color:var(--text-secondary); border:1.5px solid var(--border); border-radius:20px;
   padding:7px 16px; font-size:11px; font-weight:600; cursor:pointer; font-family:Inter,sans-serif; transition:all .15s; }
 .maint-export-btn:hover { background:var(--border); }
+/* Force GPS panel to stack vertically */
+#panel-gps .main-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* space between form and table */
+}
 
 /* Query table completed stages */
 .stage-date-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 6px; border-radius: 3px;
   font-size: 10px; font-weight: 600; margin: 1px; }
+  /* GPS Panel Styling */
+#panel-gps .card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.3s;
+}
+#panel-gps .card:hover {
+  box-shadow: 0 4px 12px rgba(235,10,30,0.08);
+  transform: translateY(-1px);
+}
+
+#panel-gps .card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 14px;
+  border-bottom: 2px solid var(--border-light);
+  padding-bottom: 8px;
+}
+
+/* GPS Stats Grid */
+#panel-gps .stats-grid .stat-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+#panel-gps .stat-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+#panel-gps .stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* GPS Table */
+#panel-gps .table-container {
+  background: var(--bg-card);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+#panel-gps table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+#panel-gps thead th {
+  background: rgba(235,10,30,0.05);
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+}
+#panel-gps tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 12px;
+  color: var(--text-primary);
+}
+#panel-gps tbody tr:hover td {
+  background: rgba(235,10,30,0.02);
+}
+
+/* Empty State */
+#panel-gps .empty-state {
+  text-align: center;
+  padding: 30px 20px;
+  color: var(--text-tertiary);
+}
+#panel-gps .empty-state i {
+  font-size: 36px;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+#panel-gps .empty-state-text {
+  font-size: 13px;
+}
+
 </style>
 <base target="_blank">
 </head>
@@ -713,7 +808,7 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
     <button class="nav-item tab-btn" data-panel="maintenance"><i class="ti ti-car-garage"></i><span>Car Maintenance</span></button>
     <button class="nav-item tab-btn" data-panel="ros"><i class="ti ti-rotate"></i><span>IHTM ROS</span></button>
     <button class="nav-item tab-btn" data-panel="gps"><i class="ti ti-satellite"></i><span>GPS Requirements</span></button>
-    <button class="nav-item tab-btn" data-panel=""><i class="ti ti-time"></i><span>Set Reminders</span></button>
+    <button class="nav-item tab-btn" data-panel="reminders"><i class="ti ti-time"></i><span>Set Reminders</span></button>
   </div>
 
   <div class="sidenav-bottom">
@@ -1642,6 +1737,7 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
     </div>
   </div>
 </div>
+
 <!--gps-->
 <div id="panel-gps" class="panel">
 <div class="container">
@@ -1755,6 +1851,109 @@ input[type="number"]:focus, input[type="text"]:focus, input[type="date"]:focus, 
 
 </div>
 </div>
+
+<!-- PANEL: SET REMINDERS -->
+<div id="panel-reminders" class="panel">
+  <div class="card" style="margin-bottom:14px;">
+    <div class="card-head">
+      <div class="card-title">Set a Reminder</div>
+      <div class="card-desc">Pick a Query project + milestone, or a KeshKomi item + target date — or set a custom reminder</div>
+    </div>
+    <div id="reminder-form-msg" style="font-size:12px;font-weight:600;display:none;padding:8px 16px;border-radius:10px;margin:12px 0;"></div>
+
+    <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+      <button type="button" class="rem-source-btn active" data-source="Query" onclick="setReminderSource('Query')">From Query Schedule</button>
+      <button type="button" class="rem-source-btn" data-source="KeshKomi" onclick="setReminderSource('KeshKomi')">From KeshKomi</button>
+      <button type="button" class="rem-source-btn" data-source="Custom" onclick="setReminderSource('Custom')">Custom Reminder</button>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+      <div class="rem-field rem-src-Query" style="display:flex;flex-direction:column;gap:4px;">
+        <label style="font-size:10px;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;">Project (from Query Schedule)</label>
+        <select id="reminder-query-project" style="border:1.5px solid var(--border);border-radius:10px;padding:9px 14px;font-size:13px;background:var(--bg-card);color:var(--text-primary);font-family:Inter,sans-serif;" onchange="onReminderQueryProjectChange()">
+          <option value="">Select Project</option>
+        </select>
+      </div>
+      <div class="rem-field rem-src-Query" style="display:flex;flex-direction:column;gap:4px;">
+        <label style="font-size:10px;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;">Milestone</label>
+        <select id="reminder-query-milestone" style="border:1.5px solid var(--border);border-radius:10px;padding:9px 14px;font-size:13px;background:var(--bg-card);color:var(--text-primary);font-family:Inter,sans-serif;">
+          <option value="Date Query">Query Date</option>
+          <option value="Speculation Date">Speculation Date</option>
+          <option value="Concept Date">Concept Date</option>
+          <option value="Estimation Date">Estimation Date</option>
+          <option value="PO Budget Date">PO / Budget Date</option>
+          <option value="Last" selected>Last Milestone (final one set)</option>
+        </select>
+      </div>
+
+      <div class="rem-field rem-src-KeshKomi" style="display:none;flex-direction:column;gap:4px;">
+        <label style="font-size:10px;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;">KeshKomi Item</label>
+        <select id="reminder-kk-item" style="border:1.5px solid var(--border);border-radius:10px;padding:9px 14px;font-size:13px;background:var(--bg-card);color:var(--text-primary);font-family:Inter,sans-serif;" onchange="onReminderKKChange()">
+          <option value="">Select Kadai Point</option>
+        </select>
+      </div>
+      <div class="rem-field rem-src-KeshKomi" style="display:none;flex-direction:column;gap:4px;">
+        <label style="font-size:10px;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;">Target Date (auto)</label>
+        <input type="date" id="reminder-kk-date" readonly style="border:1.5px solid var(--border);border-radius:10px;padding:9px 14px;font-size:13px;background:var(--bg);color:var(--text-primary);font-family:Inter,sans-serif;"/>
+      </div>
+
+      <div class="rem-field rem-src-Custom" style="display:none;flex-direction:column;gap:4px;">
+        <label style="font-size:10px;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;">Reference / Title</label>
+        <input type="text" id="reminder-custom-ref" placeholder="e.g. Renew AMC contract" style="border:1.5px solid var(--border);border-radius:10px;padding:9px 14px;font-size:13px;background:var(--bg-card);color:var(--text-primary);font-family:Inter,sans-serif;"/>
+      </div>
+      <div class="rem-field rem-src-Custom" style="display:none;flex-direction:column;gap:4px;">
+        <label style="font-size:10px;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;">Target Date</label>
+        <input type="date" id="reminder-custom-date" style="border:1.5px solid var(--border);border-radius:10px;padding:9px 14px;font-size:13px;background:var(--bg-card);color:var(--text-primary);font-family:Inter,sans-serif;"/>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <label style="font-size:10px;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;">Remind Me Before</label>
+        <select id="reminder-remind-before" style="border:1.5px solid var(--border);border-radius:10px;padding:9px 14px;font-size:13px;background:var(--bg-card);color:var(--text-primary);font-family:Inter,sans-serif;">
+          <option value="0">On the day</option>
+          <option value="1">1 day before</option>
+          <option value="3" selected>3 days before</option>
+          <option value="7">1 week before</option>
+          <option value="14">2 weeks before</option>
+          <option value="30">1 month before</option>
+        </select>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <label style="font-size:10px;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;">Remind Me Every</label>
+        <select id="reminder-remind-every" style="border:1.5px solid var(--border);border-radius:10px;padding:9px 14px;font-size:13px;background:var(--bg-card);color:var(--text-primary);font-family:Inter,sans-serif;">
+          <option value="Once">Once</option>
+          <option value="Daily" selected>Every day until due</option>
+          <option value="Weekly">Every week until due</option>
+        </select>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;grid-column:span 2;">
+        <label style="font-size:10px;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;">Note (optional)</label>
+        <input type="text" id="reminder-note" placeholder="Any extra context..." style="border:1.5px solid var(--border);border-radius:10px;padding:9px 14px;font-size:13px;background:var(--bg-card);color:var(--text-primary);font-family:Inter,sans-serif;"/>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;display:flex;gap:10px;">
+      <button onclick="saveReminder()" style="background:linear-gradient(135deg,#EB0A1E,#ff3344);color:#fff;border:none;border-radius:20px;padding:10px 28px;font-size:13px;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;box-shadow:0 4px 12px rgba(235,10,30,0.3);">
+        <i class="ti ti-device-floppy"></i> Set Reminder
+      </button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+      <div>
+        <div class="card-title">Reminder List</div>
+        <div class="card-desc">All upcoming reminders, most urgent first</div>
+      </div>
+      <button onclick="loadReminders()" style="background:var(--bg);color:var(--text-secondary);border:1.5px solid var(--border);border-radius:20px;padding:7px 16px;font-size:11px;font-weight:600;cursor:pointer;font-family:Inter,sans-serif;">
+        <i class="ti ti-refresh"></i> Refresh
+      </button>
+    </div>
+    <div id="reminder-list-text" style="margin-top:12px;font-family:'SF Mono',Consolas,monospace;font-size:12.5px;line-height:2;color:var(--text-primary);white-space:pre-wrap;">
+      Loading...
+    </div>
+  </div>
+</div>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -3025,7 +3224,7 @@ async function saveCarEntry() {
 
   try {
     const res = await fetch('/api/add-car-entry', {
-      method: 'POST', headers: authHeaders(),
+      method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeaders() },
       body: JSON.stringify(entry)
     });
     const data = await res.json();
@@ -3082,7 +3281,7 @@ async function saveActualReturn(rowIdx, slNo) {
   if (!time) { alert('Please enter a time'); return; }
   try {
     const res = await fetch('/api/update-car-actual', {
-      method: 'POST', headers: authHeaders(),
+      method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeaders() },
       body: JSON.stringify({ sl_no: slNo, actual_return: time })
     });
     const data = await res.json();
@@ -3224,7 +3423,7 @@ async function saveMaintEntry() {
   // Also save to server/Excel
   try {
     await fetch('/api/add-maintenance-entry', {
-      method: 'POST', headers: authHeaders(),
+      method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeaders() },
       body: JSON.stringify({ week: entry.week,cleanDate: entry.cleanDate, name: entry.name, cleanAck: entry.cleanAck, confDate: entry.confDate, confAck: entry.confAck,  })
     });
   } catch(e) {}
@@ -3238,7 +3437,7 @@ function updateMaintField(id, field, value) {
   renderMaintTable();
   try {
     fetch('/api/update-maintenance-entry', {
-      method: 'POST', headers: authHeaders(),
+      method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeaders() },
       body: JSON.stringify({ name: entry.name, field, value })
     }).catch(() => {});
   } catch(e) {}
